@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resource/images/login_background.png</file>
+        <file>resource/images/Logon_studio_72px_1071387_easyicon.net.png</file>
+        <file>resource/images/stock_exit_72px_1078470_easyicon.net.png</file>
+    </qresource>
+</RCC>
