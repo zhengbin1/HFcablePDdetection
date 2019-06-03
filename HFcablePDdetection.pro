@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = HFcablePDdetection
 TEMPLATE = app
@@ -25,11 +25,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        amplitudemainwidget.cpp \
+        library/axis-tags/axistag.cpp \
+        library/qcustomplot/qcustomplot.cpp \
         logindialog.cpp \
         main.cpp \
         mainwindow.cpp
 
 HEADERS += \
+        amplitudemainwidget.h \
+        library/axis-tags/axistag.h \
+        library/qcustomplot/qcustomplot.h \
         logindialog.h \
         mainwindow.h
 
