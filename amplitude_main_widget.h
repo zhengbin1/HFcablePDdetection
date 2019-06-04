@@ -4,8 +4,12 @@
 #include <QWidget>
 #include <QPainter>
 #include <QStyleOption>
+
 #include "./library/axis-tags/axistag.h"
 
+
+
+// 幅值显示窗口
 class AmplitudeMainWidget : public QWidget
 {
     Q_OBJECT

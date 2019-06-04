@@ -1,4 +1,4 @@
-#include "amplitudemainwidget.h"
+#include "amplitude_main_widget.h"
 
 AmplitudeMainWidget::AmplitudeMainWidget(QWidget *parent) : QWidget(parent)
 {

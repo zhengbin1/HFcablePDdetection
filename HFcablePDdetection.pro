@@ -25,19 +25,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        amplitudemainwidget.cpp \
+        amplitude_main_widget.cpp \
         library/axis-tags/axistag.cpp \
         library/qcustomplot/qcustomplot.cpp \
         logindialog.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        type_diagnosis_widget.cpp
 
 HEADERS += \
-        amplitudemainwidget.h \
+        amplitude_main_widget.h \
         library/axis-tags/axistag.h \
         library/qcustomplot/qcustomplot.h \
         logindialog.h \
-        mainwindow.h
+        mainwindow.h \
+        type_diagnosis_widget.h
 
 FORMS += \
         logindialog.ui \

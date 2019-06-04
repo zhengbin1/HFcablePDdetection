@@ -10,7 +10,9 @@
 #include <QSize>
 #include <QGridLayout>
 
-#include "amplitudemainwidget.h"
+#include "amplitude_main_widget.h"
+#include "type_diagnosis_widget.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -34,6 +36,12 @@ private:
     AmplitudeMainWidget *amplitudeMainWidget2;
     AmplitudeMainWidget *amplitudeMainWidget3;
     AmplitudeMainWidget *amplitudeMainWidget4;
+
+    TypeDiagnosisWidget *typeDiagnosisCH1;
+    TypeDiagnosisWidget *typeDiagnosisCH2;
+    TypeDiagnosisWidget *typeDiagnosisCH3;
+    TypeDiagnosisWidget *typeDiagnosisCH4;
+
 
 private slots:
     void timerUpdate();
