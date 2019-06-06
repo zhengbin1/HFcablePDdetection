@@ -5,28 +5,48 @@ TypeDiagnosisWidget::TypeDiagnosisWidget(QWidget *parent) : QWidget(parent)
     titleName = new QLabel(this);
     setStyleSheet("background-color:#00CED1;");
 
-    pGridLayout = new QGridLayout(this);
+    pLineEdit1 = new QLineEdit(this);
+    pLineEdit2 = new QLineEdit(this);
+    pLineEdit3 = new QLineEdit(this);
 
-    label1 = new QLabel(this);
-    label2 = new QLabel(this);
-    label3 = new QLabel(this);
+    pLineEdit1 -> setStyleSheet("background-color: #fff;");
+    pLineEdit2 -> setStyleSheet("background-color: #fff;");
+    pLineEdit3 -> setStyleSheet("background-color: #fff;");
 
-    label1 -> setStyleSheet("background-color: #fff;");
-    label2 -> setStyleSheet("background-color: #fff;");
-    label3 -> setStyleSheet("background-color: #fff;");
-
+    pLineEdit1 -> resize(100, 50);
 
     progressBar1 = new QProgressBar(this);
     progressBar2 = new QProgressBar(this);
     progressBar3 = new QProgressBar(this);
 
-    pGridLayout -> addWidget(label1, 0, 0, 1, 2);
-    pGridLayout -> addWidget(label2, 1, 0, 1, 2);
-    pGridLayout -> addWidget(label3, 2, 0, 1, 2);
+    progressBar1 -> setStyleSheet("border: 1px solid #000;color:rhb(0,255,127); text-align: center;");
+    progressBar1 -> setRange(0,100);
+    progressBar1 -> setMinimum(0);
+    progressBar1 -> setMaximum(100);
 
-    pGridLayout -> addWidget(progressBar1, 0, 1, 1, 2);
-    pGridLayout -> addWidget(progressBar2, 1, 1, 1, 2);
-    pGridLayout -> addWidget(progressBar3, 2, 1, 1, 2);
+    progressBar2 -> setStyleSheet("border: 1px solid #000;color:rhb(0,255,127); text-align: center;");
+    progressBar2 -> setRange(0,100);
+    progressBar2 -> setMinimum(0);
+    progressBar2 -> setMaximum(100);
+
+    progressBar3 -> setStyleSheet("border: 1px solid #000;color:rhb(0,255,127); text-align: center;");
+    progressBar3 -> setRange(0,100);
+    progressBar3 -> setMinimum(0);
+    progressBar3 -> setMaximum(100);
+
+    pGridLayout = new QGridLayout(this);
+
+    pGridLayout -> addWidget(pLineEdit1, 0, 0, 1, 2);
+    pGridLayout -> addWidget(pLineEdit2, 1, 0, 1, 2);
+    pGridLayout -> addWidget(pLineEdit3, 2, 0, 1, 2);
+
+    pGridLayout -> addWidget(progressBar1, 0, 2, 1, 2);
+    pGridLayout -> addWidget(progressBar2, 1, 2, 1, 2);
+    pGridLayout -> addWidget(progressBar3, 2, 2, 1, 2);
+
+    m_progressValue = 0;
+
+    startTimer(1000);
 }
 
 TypeDiagnosisWidget::~TypeDiagnosisWidget()
@@ -34,9 +54,9 @@ TypeDiagnosisWidget::~TypeDiagnosisWidget()
     delete titleName;
     delete pGridLayout;
 
-    delete label1;
-    delete label2;
-    delete label3;
+    delete pLineEdit1;
+    delete pLineEdit2;
+    delete pLineEdit3;
 
     delete progressBar1;
     delete progressBar2;
@@ -68,4 +88,18 @@ void TypeDiagnosisWidget::setTitleName(QString name)
 void TypeDiagnosisWidget::setSize(int width, int height)
 {
     this -> resize(width, height);
+}
+
+void TypeDiagnosisWidget::timerEvent(QTimerEvent *)
+{
+    m_progressValue ++;
+
+    if(m_progressValue >= 100)
+    {
+        m_progressValue = 0;
+    } else {
+        progressBar1 -> setValue(m_progressValue);
+        progressBar2 -> setValue(m_progressValue);
+        progressBar3 -> setValue(m_progressValue);
+    }
 }

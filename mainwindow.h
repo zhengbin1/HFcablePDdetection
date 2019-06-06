@@ -10,7 +10,7 @@
 #include <QSize>
 #include <QGridLayout>
 
-#include "amplitude_main_widget.h"
+#include "scatter_plot.h"
 #include "type_diagnosis_widget.h"
 
 
@@ -32,15 +32,17 @@ private:
     QGridLayout *pGridLayout;
     QLabel *text3;
 
-    AmplitudeMainWidget *amplitudeMainWidget1;
-    AmplitudeMainWidget *amplitudeMainWidget2;
-    AmplitudeMainWidget *amplitudeMainWidget3;
-    AmplitudeMainWidget *amplitudeMainWidget4;
+    ScatterPlot *pScatterPlot1;
+    ScatterPlot *pScatterPlot2;
+    ScatterPlot *pScatterPlot3;
+    ScatterPlot *pScatterPlot4;
 
     TypeDiagnosisWidget *typeDiagnosisCH1;
     TypeDiagnosisWidget *typeDiagnosisCH2;
     TypeDiagnosisWidget *typeDiagnosisCH3;
     TypeDiagnosisWidget *typeDiagnosisCH4;
+
+    QWidget *pCentralWidget;
 
 
 private slots:

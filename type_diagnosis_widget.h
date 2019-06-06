@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QStyleOption>
 #include <QLabel>
+#include <QLineEdit>
 #include <QGridLayout>
 #include <QProgressBar>
 
@@ -27,14 +28,18 @@ private:
     int m_height;
 
     QGridLayout *pGridLayout;
-    QLabel *label1;
-    QLabel *label2;
-    QLabel *label3;
+
+    QLineEdit *pLineEdit1;
+    QLineEdit *pLineEdit2;
+    QLineEdit *pLineEdit3;
 
     QProgressBar *progressBar1;
     QProgressBar *progressBar2;
     QProgressBar *progressBar3;
 
+    void timerEvent(QTimerEvent *);
+
+    int m_progressValue;
 signals:
 
 public slots:

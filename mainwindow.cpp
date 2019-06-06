@@ -32,35 +32,39 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(timerUpdate()));
     timer -> start(1000);
 
-    amplitudeMainWidget1 = new AmplitudeMainWidget(this);
-    amplitudeMainWidget2 = new AmplitudeMainWidget(this);
-    amplitudeMainWidget3 = new AmplitudeMainWidget(this);
-    amplitudeMainWidget4 = new AmplitudeMainWidget(this);
+    pCentralWidget = new QWidget(this);
+    setCentralWidget(pCentralWidget);
 
-    typeDiagnosisCH1 = new TypeDiagnosisWidget(this);
-    typeDiagnosisCH2 = new TypeDiagnosisWidget(this);
-    typeDiagnosisCH3 = new TypeDiagnosisWidget(this);
-    typeDiagnosisCH4 = new TypeDiagnosisWidget(this);
+    pScatterPlot1 = new ScatterPlot(pCentralWidget);
+    pScatterPlot2 = new ScatterPlot(pCentralWidget);
+    pScatterPlot3 = new ScatterPlot(pCentralWidget);
+    pScatterPlot4 = new ScatterPlot(pCentralWidget);
+
+    typeDiagnosisCH1 = new TypeDiagnosisWidget(pCentralWidget);
+    typeDiagnosisCH2 = new TypeDiagnosisWidget(pCentralWidget);
+    typeDiagnosisCH3 = new TypeDiagnosisWidget(pCentralWidget);
+    typeDiagnosisCH4 = new TypeDiagnosisWidget(pCentralWidget);
 
     typeDiagnosisCH1 -> setTitleName("类型诊断-CH1");
     typeDiagnosisCH2 -> setTitleName("类型诊断-CH2");
     typeDiagnosisCH3 -> setTitleName("类型诊断-CH3");
     typeDiagnosisCH4 -> setTitleName("类型诊断-CH4");
 
-    pGridLayout = new QGridLayout(this);
-    pGridLayout -> setContentsMargins(0, 0, 0, 0);
-    pGridLayout -> setHorizontalSpacing(0);
-    pGridLayout -> setVerticalSpacing(0);
+    pGridLayout = new QGridLayout(pCentralWidget);
+    pGridLayout -> setMargin(0);
 
-    pGridLayout -> addWidget(amplitudeMainWidget1, 0 ,0, 1, 1);
-    pGridLayout -> addWidget(amplitudeMainWidget2, 0 ,1, 1, 1);
-    pGridLayout -> addWidget(amplitudeMainWidget3, 0 ,2, 1, 1);
-    pGridLayout -> addWidget(amplitudeMainWidget4, 0 ,3, 1, 1);
+    pGridLayout -> addWidget(pScatterPlot1, 0 ,0, 1, 1);
+    pGridLayout -> addWidget(pScatterPlot2, 0 ,1, 1, 1);
+    pGridLayout -> addWidget(pScatterPlot3, 0 ,2, 1, 1);
+    pGridLayout -> addWidget(pScatterPlot4, 0 ,3, 1, 1);
 
     pGridLayout -> addWidget(typeDiagnosisCH1, 1 ,0, 1, 1);
     pGridLayout -> addWidget(typeDiagnosisCH2, 1 ,1, 1, 1);
     pGridLayout -> addWidget(typeDiagnosisCH3, 1 ,2, 1, 1);
     pGridLayout -> addWidget(typeDiagnosisCH4, 1 ,3, 1, 1);
+
+
+    pCentralWidget -> setLayout(pGridLayout);
 }
 
 MainWindow::~MainWindow()
@@ -69,10 +73,10 @@ MainWindow::~MainWindow()
     delete pGridLayout;
     delete text3;
 
-    delete amplitudeMainWidget1;
-    delete amplitudeMainWidget2;
-    delete amplitudeMainWidget3;
-    delete amplitudeMainWidget4;
+    delete pScatterPlot1;
+    delete pScatterPlot2;
+    delete pScatterPlot3;
+    delete pScatterPlot4;
 
     delete typeDiagnosisCH1;
     delete typeDiagnosisCH2;
@@ -89,19 +93,18 @@ void MainWindow::timerUpdate()
 
 void MainWindow::paintEvent(QPaintEvent *)
 {
-    int width = this -> geometry().width();  // 窗口宽度
-    int height = this -> geometry().height();  // 窗口高度
+    int centralWidth = pCentralWidget -> width();  // 窗口宽度
+    int centralHeight = pCentralWidget -> height();  // 窗口高度
 
-    amplitudeMainWidget1 -> setSize(width / 4 - 20, height / 3 - 20);
-    amplitudeMainWidget2 -> setSize(width / 4 - 20, height / 3 - 20);
-    amplitudeMainWidget3 -> setSize(width / 4 - 20, height / 3 - 20);
-    amplitudeMainWidget4 -> setSize(width / 4 - 20, height / 3 - 20);
+    pScatterPlot1 -> resize(centralWidth / 4, centralHeight / 3);
+    pScatterPlot2 -> resize(centralWidth / 4, centralHeight / 3);
+    pScatterPlot3 -> resize(centralWidth / 4, centralHeight / 3);
+    pScatterPlot4 -> resize(centralWidth / 4, centralHeight / 3);
 
-    typeDiagnosisCH1 -> setSize(width / 4 - 20, height / 3 - 20);
-    typeDiagnosisCH2 -> setSize(width / 4 - 20, height / 3 - 20);
-    typeDiagnosisCH3 -> setSize(width / 4 - 20, height / 3 - 20);
-    typeDiagnosisCH4 -> setSize(width / 4 - 20, height / 3 - 20);
+    typeDiagnosisCH1 -> setSize(centralWidth / 4 - 5, centralHeight / 3);
+    typeDiagnosisCH2 -> setSize(centralWidth / 4 - 5, centralHeight / 3);
+    typeDiagnosisCH3 -> setSize(centralWidth / 4 - 5, centralHeight / 3);
+    typeDiagnosisCH4 -> setSize(centralWidth / 4 - 5, centralHeight / 3);
 
-
-    pGridLayout -> setGeometry(QRect(0, 20, width, height - 50));
+    pGridLayout -> setGeometry(QRect(0, 0, centralWidth, centralHeight - 220));
 }
