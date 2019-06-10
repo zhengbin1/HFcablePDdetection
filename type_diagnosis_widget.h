@@ -8,6 +8,21 @@
 #include <QLineEdit>
 #include <QGridLayout>
 #include <QProgressBar>
+#include <QPushButton>
+#include <QSpinBox>
+
+
+// 开始和暂停按钮
+class PlayAndPauseButton : public QPushButton
+{
+    Q_OBJECT
+public:
+    PlayAndPauseButton(QWidget *parent = nullptr);
+    virtual ~PlayAndPauseButton();
+
+private:
+    void paintEvent(QPaintEvent *);
+};
 
 
 // 类型诊断窗口
@@ -16,12 +31,13 @@ class TypeDiagnosisWidget : public QWidget
     Q_OBJECT
 public:
     explicit TypeDiagnosisWidget(QWidget *parent = nullptr);
-    ~TypeDiagnosisWidget();
+    virtual ~TypeDiagnosisWidget();
     void paintEvent(QPaintEvent *);
 
     void setTitleName(QString name);
     void setSize(int width, int height);
 
+    void setTypeName(QString name);
 private:
     QLabel *titleName;
     int m_width;
@@ -40,6 +56,8 @@ private:
     void timerEvent(QTimerEvent *);
 
     int m_progressValue;
+
+    QString m_TypeName;
 signals:
 
 public slots:

@@ -1,4 +1,27 @@
 #include "type_diagnosis_widget.h"
+#include <QDebug>
+
+
+PlayAndPauseButton::PlayAndPauseButton(QWidget *parent) : QPushButton (parent)
+{
+    this -> setStyleSheet("background-image: url(:/resource/images/pause_32px_1134007_easyicon.net.png);");
+}
+
+PlayAndPauseButton::~PlayAndPauseButton()
+{
+
+}
+
+void PlayAndPauseButton::paintEvent(QPaintEvent *e)
+{
+    QStyleOption opt;
+    opt.initFrom(this);
+    QPainter p(this);
+    style() -> drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    QWidget::paintEvent(e);
+
+    this -> resize(35, 35);
+}
 
 TypeDiagnosisWidget::TypeDiagnosisWidget(QWidget *parent) : QWidget(parent)
 {
@@ -43,6 +66,68 @@ TypeDiagnosisWidget::TypeDiagnosisWidget(QWidget *parent) : QWidget(parent)
     pGridLayout -> addWidget(progressBar1, 0, 2, 1, 2);
     pGridLayout -> addWidget(progressBar2, 1, 2, 1, 2);
     pGridLayout -> addWidget(progressBar3, 2, 2, 1, 2);
+
+    PlayAndPauseButton *pPlayAndPauseButton = new PlayAndPauseButton();
+    QLabel *text1 = new QLabel();
+    QLabel *text2 = new QLabel();
+    text1 -> setText("相位");
+    text2 -> setText("阈值");
+
+    QSlider *pSlider1 = new QSlider(this);
+    pSlider1 -> setOrientation(Qt::Horizontal);
+    pSlider1 -> setMinimum(0);
+    pSlider1 -> setMaximum(100);
+    pSlider1 -> setSingleStep(1);
+
+    pSlider1 -> setStyleSheet("QSlider::groove:horizontal {height: 5px;background: #C0C0C0;border: 1px solid #4A708B;border-radius: 1px; padding-left:-1px; padding-right:-1px;}"
+                             "QSlider::sub-page:horizontal {height: 10px; background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1, stop:1 #c4c4c4); background: qlineargradient(x1:0, y1:0.2, x2:1, y2:1, stop:0 #5DCCFF, stop:1 #1874CD); border: 1px solid #4A708B; border-radius: 2px;}"
+                             "QSlider::add-page:horizontal {height: 10px; background: #575757; border: 0px solid #777; border-radius: 2px;}"
+                             "QSlider::handle:horizontal { width: 11px; background: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.6 #45ADED, stop:0.778409 rgba(255, 255, 255, 255)); margin-top: -3px; margin-bottom: -3px; border-radius: 5px;}"
+                             "QSlider::handle:horizontal:hover {width: 11px; background: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.6 #2A8BDA, stop:0.778409 rgba(255, 255, 255, 255));margin-top: -3px;margin-bottom: -3px;border-radius: 5px;}"
+                             "QSlider::sub-page:horizontal:disabled {background: #00009C; border-color: #999;}"
+                             "QSlider::add-page:horizontal:disabled {background: #eee; border-color: #999;}"
+                             "QSlider::handle:horizontal:disabled { background: #eee; border: 1px solid #aaa; border-radius: 4px;}");
+
+    QSlider *pSlider2 = new QSlider(this);
+    pSlider2 -> setOrientation(Qt::Horizontal);
+    pSlider2 -> setMinimum(0);
+    pSlider2 -> setMaximum(100);
+    pSlider2 -> setSingleStep(1);
+
+    pSlider2 -> setStyleSheet("QSlider::groove:horizontal {height: 5px;background: #C0C0C0;border: 1px solid #4A708B;border-radius: 1px; padding-left:-1px; padding-right:-1px;}"
+                             "QSlider::sub-page:horizontal {height: 10px; background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1, stop:1 #c4c4c4); background: qlineargradient(x1:0, y1:0.2, x2:1, y2:1, stop:0 #5DCCFF, stop:1 #1874CD); border: 1px solid #4A708B; border-radius: 2px;}"
+                             "QSlider::add-page:horizontal {height: 10px; background: #575757; border: 0px solid #777; border-radius: 2px;}"
+                             "QSlider::handle:horizontal { width: 11px; background: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.6 #45ADED, stop:0.778409 rgba(255, 255, 255, 255)); margin-top: -3px; margin-bottom: -3px; border-radius: 5px;}"
+                             "QSlider::handle:horizontal:hover {width: 11px; background: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.6 #2A8BDA, stop:0.778409 rgba(255, 255, 255, 255));margin-top: -3px;margin-bottom: -3px;border-radius: 5px;}"
+                             "QSlider::sub-page:horizontal:disabled {background: #00009C; border-color: #999;}"
+                             "QSlider::add-page:horizontal:disabled {background: #eee; border-color: #999;}"
+                             "QSlider::handle:horizontal:disabled { background: #eee; border: 1px solid #aaa; border-radius: 4px;}");
+
+    QSpinBox *pSpinBox1 = new QSpinBox(this);
+    pSpinBox1 -> setMinimum(0);
+    pSpinBox1 -> setMaximum(100);
+    pSpinBox1 -> setSingleStep(1);
+
+    QSpinBox *pSpinBox2 = new QSpinBox(this);
+    pSpinBox2 -> setMinimum(0);
+    pSpinBox2 -> setMaximum(100);
+    pSpinBox2 -> setSingleStep(1);
+
+    connect(pSpinBox1, SIGNAL(valueChanged(int)), pSlider1, SLOT(setValue(int)));
+    connect(pSlider1, SIGNAL(valueChanged(int)), pSpinBox1, SLOT(setValue(int)));
+    connect(pSpinBox2, SIGNAL(valueChanged(int)), pSlider2, SLOT(setValue(int)));
+    connect(pSlider2, SIGNAL(valueChanged(int)), pSpinBox2, SLOT(setValue(int)));
+
+    QGridLayout *pGridLayout2 = new QGridLayout();
+    pGridLayout2 -> addWidget(pPlayAndPauseButton, 0, 0, 2, 1);
+    pGridLayout2 -> addWidget(text1, 0, 1, 1, 1);
+    pGridLayout2 -> addWidget(text2, 1, 1, 1, 1);
+    pGridLayout2 -> addWidget(pSlider1, 0, 2, 1, 1);
+    pGridLayout2 -> addWidget(pSlider2, 1, 2, 1, 1);
+    pGridLayout2 -> addWidget(pSpinBox1, 0, 3, 1, 1);
+    pGridLayout2 -> addWidget(pSpinBox2, 1, 3, 1, 1);
+
+    pGridLayout -> addLayout(pGridLayout2, 3, 0, 1, 4);
 
     m_progressValue = 0;
 
@@ -102,4 +187,9 @@ void TypeDiagnosisWidget::timerEvent(QTimerEvent *)
         progressBar2 -> setValue(m_progressValue);
         progressBar3 -> setValue(m_progressValue);
     }
+}
+
+void TypeDiagnosisWidget::setTypeName(QString name)
+{
+    m_TypeName = name;
 }
