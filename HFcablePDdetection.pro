@@ -31,6 +31,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         scatter_plot.cpp \
+        type_diagnosis_double_slider.cpp \
         type_diagnosis_widget.cpp
 
 HEADERS += \
@@ -39,6 +40,7 @@ HEADERS += \
         logindialog.h \
         mainwindow.h \
         scatter_plot.h \
+        type_diagnosis_double_slider.h \
         type_diagnosis_widget.h
 
 FORMS += \

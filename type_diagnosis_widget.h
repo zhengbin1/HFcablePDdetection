@@ -10,7 +10,25 @@
 #include <QProgressBar>
 #include <QPushButton>
 #include <QSpinBox>
+#include <QSlider>
+#include <QRadioButton>
 
+#include "type_diagnosis_double_slider.h"
+
+// 自绘radio按钮
+class RadioButton : public QPushButton
+{
+    Q_OBJECT
+public:
+    RadioButton(QWidget *parent = nullptr);
+    virtual ~RadioButton();
+
+    void mousePressEvent(QMouseEvent *);
+
+private:
+    void paintEvent(QPaintEvent *);
+    int m_flag;
+};
 
 // 开始和暂停按钮
 class PlayAndPauseButton : public QPushButton
@@ -20,8 +38,11 @@ public:
     PlayAndPauseButton(QWidget *parent = nullptr);
     virtual ~PlayAndPauseButton();
 
+    void mousePressEvent(QMouseEvent *);
+
 private:
     void paintEvent(QPaintEvent *);
+    int m_flag;
 };
 
 
@@ -29,6 +50,7 @@ private:
 class TypeDiagnosisWidget : public QWidget
 {
     Q_OBJECT
+
 public:
     explicit TypeDiagnosisWidget(QWidget *parent = nullptr);
     virtual ~TypeDiagnosisWidget();
@@ -38,6 +60,8 @@ public:
     void setSize(int width, int height);
 
     void setTypeName(QString name);
+    QString getTypeName();
+
 private:
     QLabel *titleName;
     int m_width;
@@ -48,6 +72,7 @@ private:
     QLineEdit *pLineEdit1;
     QLineEdit *pLineEdit2;
     QLineEdit *pLineEdit3;
+    QLineEdit *pLineEdit4;
 
     QProgressBar *progressBar1;
     QProgressBar *progressBar2;
@@ -58,6 +83,9 @@ private:
     int m_progressValue;
 
     QString m_TypeName;
+
+    QRadioButton *radioButton2;
+
 signals:
 
 public slots:

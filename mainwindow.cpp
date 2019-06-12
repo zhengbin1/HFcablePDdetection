@@ -50,6 +50,11 @@ MainWindow::MainWindow(QWidget *parent) :
     typeDiagnosisCH3 -> setTitleName("类型诊断-CH3");
     typeDiagnosisCH4 -> setTitleName("类型诊断-CH4");
 
+    typeDiagnosisCH1 -> setTypeName("CH1");
+    typeDiagnosisCH2 -> setTypeName("CH2");
+    typeDiagnosisCH3 -> setTypeName("CH3");
+    typeDiagnosisCH4 -> setTypeName("CH4");
+
     pGridLayout = new QGridLayout(pCentralWidget);
     pGridLayout -> setMargin(0);
 
