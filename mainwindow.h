@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QLabel>
-#include <QHBoxLayout>
 #include <QTimer>
 #include <QDateTime>
 #include <QPainter>
@@ -12,6 +11,7 @@
 
 #include "scatter_plot.h"
 #include "type_diagnosis_widget.h"
+#include "trend_channel_widget.h"
 
 
 namespace Ui {
@@ -25,10 +25,10 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void paintEvent(QPaintEvent *);
 
 private:
     Ui::MainWindow *ui;
+
     QGridLayout *pGridLayout;
     QLabel *text3;
 
@@ -41,6 +41,8 @@ private:
     TypeDiagnosisWidget *typeDiagnosisCH2;
     TypeDiagnosisWidget *typeDiagnosisCH3;
     TypeDiagnosisWidget *typeDiagnosisCH4;
+
+    TrendChannelWidget *trendChannelWidget;
 
     QWidget *pCentralWidget;
 

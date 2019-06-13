@@ -31,6 +31,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         scatter_plot.cpp \
+        trend_channel_widget.cpp \
         type_diagnosis_double_slider.cpp \
         type_diagnosis_widget.cpp
 
@@ -40,6 +41,7 @@ HEADERS += \
         logindialog.h \
         mainwindow.h \
         scatter_plot.h \
+        trend_channel_widget.h \
         type_diagnosis_double_slider.h \
         type_diagnosis_widget.h
 

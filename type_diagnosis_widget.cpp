@@ -193,9 +193,9 @@ TypeDiagnosisWidget::TypeDiagnosisWidget(QWidget *parent) : QWidget(parent)
     pGridLayout2 -> addWidget(pSlider2, 1, 2, 1, 1);
     pGridLayout2 -> addWidget(pSpinBox1, 0, 3, 1, 1);
     pGridLayout2 -> addWidget(pSpinBox2, 1, 3, 1, 1);
-    pGridLayout2 -> addWidget(text3, 0, 4, 1, 1);
-    pGridLayout2 -> addWidget(radioButton1, 0, 5, 1, 1);
-    pGridLayout2 -> addWidget(pLineEdit4, 0, 6, 1, 1);
+    pGridLayout2 -> addWidget(text3, 0, 4, 1, 1, Qt::AlignHCenter);
+    pGridLayout2 -> addWidget(radioButton1, 0, 5, 1, 1, Qt::AlignHCenter);
+    pGridLayout2 -> addWidget(pLineEdit4, 0, 6, 1, 1, Qt::AlignHCenter);
     pGridLayout2 -> addWidget(radioButton2, 1, 4, 1, 3, Qt::AlignHCenter);
 
     pGridLayout2 -> setColumnStretch(0, 1);
