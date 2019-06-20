@@ -100,7 +100,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::timerUpdate()
 {
-    QDateTime time = QDateTime::currentDateTime();
-    QString str = time.toString("yyyy-MM-dd hh:mm:ss");
+    QDateTime datetime = QDateTime::currentDateTime();
+    QString str = datetime.toString("yyyy-MM-dd hh:mm:ss");
     text3 -> setText(str);
 }

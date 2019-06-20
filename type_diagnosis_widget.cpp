@@ -30,6 +30,7 @@ void RadioButton::paintEvent(QPaintEvent *e)
     this -> resize(16, 16);
 
     if(m_flag == 1){
+        p.setRenderHint(QPainter::Antialiasing);
         p.setPen(QPen(Qt::lightGray, 1, Qt::SolidLine));
         p.setBrush(QBrush(Qt::white, Qt::SolidPattern));
         p.drawEllipse(0, 0, 16, 16);
@@ -38,6 +39,7 @@ void RadioButton::paintEvent(QPaintEvent *e)
         p.drawEllipse(2, 2, 13, 13);
         p.end();
     } else if (m_flag == 2) {
+        p.setRenderHint(QPainter::Antialiasing);
         p.setPen(QPen(Qt::lightGray, 1, Qt::SolidLine));
         p.setBrush(QBrush(Qt::white, Qt::SolidPattern));
         p.drawEllipse(0, 0, 16, 16);

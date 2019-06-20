@@ -8,9 +8,33 @@
 #include <QRadioButton>
 #include <QLabel>
 #include <QGridLayout>
+#include <QTimer>
+
+#include "library/qcustomplot/qcustomplot.h"
+
+class QCPLine1 : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit QCPLine1(QWidget *parent = nullptr);
+    ~QCPLine1();
+    void paintEvent(QPaintEvent *);
+    void timerEvent(QTimerEvent *);
+
+private:
+    QCustomPlot *m_Plot;
+    QPointer<QCPGraph> m_Graph1;
+    QPointer<QCPGraph> m_Graph2;
+
+    int m_startTime = 0;
+
+private slots:
+    void QCPMoveEvent(QMouseEvent *);
+};
+
 
 // 趋势通道
-
 class TrendChannelWidget : public QWidget
 {
     Q_OBJECT
@@ -21,9 +45,9 @@ public:
     void paintEvent(QPaintEvent *);
 
 private:
-
     QGridLayout *m_CH_Layout;
     QButtonGroup *buttonGroup;
+    QCPLine1 *pQCPLine1;
 
 signals:
 

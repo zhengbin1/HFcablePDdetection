@@ -25,7 +25,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        library/axis-tags/axistag.cpp \
         library/qcustomplot/qcustomplot.cpp \
         logindialog.cpp \
         main.cpp \
@@ -36,7 +35,6 @@ SOURCES += \
         type_diagnosis_widget.cpp
 
 HEADERS += \
-        library/axis-tags/axistag.h \
         library/qcustomplot/qcustomplot.h \
         logindialog.h \
         mainwindow.h \
