@@ -26,6 +26,7 @@ private:
     QCustomPlot *m_Plot;
     QPointer<QCPGraph> m_Graph1;
     QPointer<QCPGraph> m_Graph2;
+    QHBoxLayout *m_HBoxLayout;
 
     int m_startTime = 0;
 
@@ -33,6 +34,30 @@ private slots:
     void QCPMoveEvent(QMouseEvent *);
 };
 
+class QCPLine2 : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit QCPLine2(QWidget *parent = nullptr);
+    ~QCPLine2();
+    void paintEvent(QPaintEvent *);
+    void timerEvent(QTimerEvent *);
+
+private:
+
+    QCustomPlot *m_Plot;
+    QPointer<QCPGraph> m_Graph1;
+    QPointer<QCPGraph> m_Graph2;
+
+    QHBoxLayout *m_HBoxLayout;
+
+    int m_startTime = 0;
+    int m_MaxValueY = 1000;
+
+private slots:
+    void QCPMoveEvent(QMouseEvent *);
+};
 
 // 趋势通道
 class TrendChannelWidget : public QWidget
@@ -45,9 +70,11 @@ public:
     void paintEvent(QPaintEvent *);
 
 private:
-    QGridLayout *m_CH_Layout;
-    QButtonGroup *buttonGroup;
+    QVBoxLayout *m_CH_Layout;
+    QHBoxLayout *m_HBoxLayout;
+    QButtonGroup *m_ButtonGroup;
     QCPLine1 *pQCPLine1;
+    QCPLine2 *pQCPLine2;
 
 signals:
 
