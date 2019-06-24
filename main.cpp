@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     if (ret == QDialog::Accepted) {
         w.show();
     } else if(ret == QDialog::Rejected) {
-        a.exit();
+        a.exit(0);
     }
 
     return a.exec();

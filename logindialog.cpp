@@ -63,7 +63,7 @@ void LoginDialog::paintEvent(QPaintEvent *)
 
 void LoginDialog::closeEvent(QCloseEvent *)
 {
-    QApplication::exit();
+    QApplication::exit(0);
 }
 
 void LoginDialog::on_login_click()

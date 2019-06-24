@@ -12,6 +12,7 @@
 #include "scatter_plot.h"
 #include "type_diagnosis_widget.h"
 #include "trend_channel_widget.h"
+#include "new_product_dialog.h"
 
 
 namespace Ui {
@@ -46,6 +47,7 @@ private:
 
     QWidget *pCentralWidget;
 
+    NewProductDialog *pNewProductDialog;
 
 private slots:
     void timerUpdate();

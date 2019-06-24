@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     setWindowTitle("HF电缆局放检测系统");
+    setStyleSheet("background-color: #C9C9C9;");
 
     QLabel *company = new QLabel(this);
     company -> setText("高频局放检测系统,Copyright(C)2019 北京华电智成电气设备有限公司,All rights reserved.");
@@ -77,6 +78,10 @@ MainWindow::MainWindow(QWidget *parent) :
     pGridLayout -> setRowStretch(2, 1);
 
     pCentralWidget -> setLayout(pGridLayout);
+
+    pNewProductDialog = new NewProductDialog(this);
+    pNewProductDialog -> resize(300, 300);
+    pNewProductDialog -> show();
 }
 
 MainWindow::~MainWindow()
@@ -96,6 +101,8 @@ MainWindow::~MainWindow()
     delete typeDiagnosisCH4;
 
     delete trendChannelWidget;
+
+    delete pNewProductDialog;
 }
 
 void MainWindow::timerUpdate()

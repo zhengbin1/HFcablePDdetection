@@ -29,6 +29,7 @@ SOURCES += \
         logindialog.cpp \
         main.cpp \
         mainwindow.cpp \
+        new_product_dialog.cpp \
         scatter_plot.cpp \
         trend_channel_widget.cpp \
         type_diagnosis_double_slider.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
         library/qcustomplot/qcustomplot.h \
         logindialog.h \
         mainwindow.h \
+        new_product_dialog.h \
         scatter_plot.h \
         trend_channel_widget.h \
         type_diagnosis_double_slider.h \

@@ -98,7 +98,7 @@ void PlayAndPauseButton::paintEvent(QPaintEvent *e)
 TypeDiagnosisWidget::TypeDiagnosisWidget(QWidget *parent) : QWidget(parent)
 {
     titleName = new QLabel(this);
-    setStyleSheet("background-color:#00CED1;");
+    setStyleSheet("background-color: #00CED1;");
 
     pLineEdit1 = new QLineEdit(this);
     pLineEdit2 = new QLineEdit(this);
