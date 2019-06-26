@@ -254,7 +254,7 @@ void TypeDiagnosisWidget::paintEvent(QPaintEvent *e)
 
 void TypeDiagnosisWidget::setTitleName(QString name)
 {
-    titleName -> setText("<p style=\"line-height:30px;height:20px;color:#FFF68F;font-size:12px;text-align:center;\">" + name + "<p>");
+    titleName -> setText("<p style=\"line-height:30px;height:20px;color:#FFF68F;font-size:12px;text-align:center;\">" + name + "</p>");
 }
 
 void TypeDiagnosisWidget::setSize(int width, int height)

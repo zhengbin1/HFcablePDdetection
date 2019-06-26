@@ -242,7 +242,7 @@ void QCPLine2::QCPMoveEvent(QMouseEvent *event)
 TrendChannelWidget::TrendChannelWidget(QWidget *parent) : QWidget(parent)
 {
     QLabel *text4 = new QLabel(this);
-    text4 -> setText("<p style=\"height:15px;color:green;font-size:13px;text-align:center;\">趋势通道选择<p>");
+    text4 -> setText("<p style=\"height:15px;color:green;font-size:13px;text-align:center;\">趋势通道选择</p>");
 
     QRadioButton *radioButton1 = new QRadioButton(this);
     radioButton1 -> setLayoutDirection(Qt::RightToLeft);

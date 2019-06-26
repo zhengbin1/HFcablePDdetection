@@ -80,8 +80,8 @@ MainWindow::MainWindow(QWidget *parent) :
     pCentralWidget -> setLayout(pGridLayout);
 
     pNewProductDialog = new NewProductDialog(this);
-    pNewProductDialog -> resize(300, 300);
-    pNewProductDialog -> show();
+    pNewProductDialog -> hide();
+    connect(ui -> menu_1, SIGNAL(triggered(QAction *)), this, SLOT(triggerMenu(QAction *)));
 }
 
 MainWindow::~MainWindow()
@@ -110,4 +110,12 @@ void MainWindow::timerUpdate()
     QDateTime datetime = QDateTime::currentDateTime();
     QString str = datetime.toString("yyyy-MM-dd hh:mm:ss");
     text3 -> setText(str);
+}
+
+void MainWindow::triggerMenu(QAction *a)
+{
+    if(a -> objectName() == "action_1")
+    {
+        pNewProductDialog -> show();
+    }
 }
