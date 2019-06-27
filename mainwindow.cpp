@@ -19,10 +19,13 @@ MainWindow::MainWindow(QWidget *parent) :
     text2 -> setText("相位:50.00Hz");
     text3 = new QLabel(ui -> statusBar);
 
-    company -> setMinimumWidth(500);
-    text1 -> setMinimumWidth(200);
-    text2 -> setMinimumWidth(100);
-    text3 -> setMinimumWidth(100);
+    OperationFile::isDirExist(OperationFile::strRootPath);
+    text1 -> setText(OperationFile::strRootPath);
+
+    company -> setMinimumWidth(600);
+    text1 -> setMinimumWidth(300);
+    text2 -> setMinimumWidth(150);
+    text3 -> setMinimumWidth(150);
 
     ui -> statusBar -> addWidget(company);
     ui -> statusBar -> addWidget(text1);
@@ -61,15 +64,15 @@ MainWindow::MainWindow(QWidget *parent) :
     pGridLayout = new QGridLayout(pCentralWidget);
     pGridLayout -> setMargin(0);
 
-    pGridLayout -> addWidget(pScatterPlot1, 0 ,0, 1, 1);
-    pGridLayout -> addWidget(pScatterPlot2, 0 ,1, 1, 1);
-    pGridLayout -> addWidget(pScatterPlot3, 0 ,2, 1, 1);
-    pGridLayout -> addWidget(pScatterPlot4, 0 ,3, 1, 1);
+    pGridLayout -> addWidget(pScatterPlot1, 0, 0, 1, 1);
+    pGridLayout -> addWidget(pScatterPlot2, 0, 1, 1, 1);
+    pGridLayout -> addWidget(pScatterPlot3, 0, 2, 1, 1);
+    pGridLayout -> addWidget(pScatterPlot4, 0, 3, 1, 1);
 
-    pGridLayout -> addWidget(typeDiagnosisCH1, 1 ,0, 1, 1);
-    pGridLayout -> addWidget(typeDiagnosisCH2, 1 ,1, 1, 1);
-    pGridLayout -> addWidget(typeDiagnosisCH3, 1 ,2, 1, 1);
-    pGridLayout -> addWidget(typeDiagnosisCH4, 1 ,3, 1, 1);
+    pGridLayout -> addWidget(typeDiagnosisCH1, 1, 0, 1, 1);
+    pGridLayout -> addWidget(typeDiagnosisCH2, 1, 1, 1, 1);
+    pGridLayout -> addWidget(typeDiagnosisCH3, 1, 2, 1, 1);
+    pGridLayout -> addWidget(typeDiagnosisCH4, 1, 3, 1, 1);
 
     pGridLayout -> addWidget(trendChannelWidget, 2, 0, 1, 4);
 

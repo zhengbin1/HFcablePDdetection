@@ -13,6 +13,7 @@
 #include "type_diagnosis_widget.h"
 #include "trend_channel_widget.h"
 #include "new_product_dialog.h"
+#include "operation_file.h"
 
 
 namespace Ui {

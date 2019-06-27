@@ -30,6 +30,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         new_product_dialog.cpp \
+        operation_file.cpp \
         scatter_plot.cpp \
         trend_channel_widget.cpp \
         type_diagnosis_double_slider.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
         logindialog.h \
         mainwindow.h \
         new_product_dialog.h \
+        operation_file.h \
         scatter_plot.h \
         trend_channel_widget.h \
         type_diagnosis_double_slider.h \

@@ -19,7 +19,7 @@ NewProductDialog::NewProductDialog(QWidget *parent):QDialog (parent)
     m_screen_width = rect.width();
     m_screen_height = rect.height();
 
-    resize(m_screen_width / 3, m_screen_height / 2);
+    resize(m_screen_width / 2, m_screen_height / 2);
 
     pText1 = new QLabel(this);
     pText1 -> setText("<p style=\"color:#FFFFFF;font-size:20px;text-align:center;\">项目信息录入</p>");
@@ -75,9 +75,10 @@ NewProductDialog::NewProductDialog(QWidget *parent):QDialog (parent)
     m_TableView -> verticalHeader() -> setHidden(true);
     m_TableView -> horizontalHeader() -> setSectionResizeMode(QHeaderView::Stretch);
     m_TableView -> horizontalHeader() -> setStyleSheet("QHeaderView::section{background-color:#000000;color:#FFFFFF;} QHeaderView::section:hover{background-color:#ffff00;}");
+    m_TableView -> setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     QStringList headherlist;
-    headherlist << "编号" << "变电站名称" << "设备类型" << "电压等级" << "检测相别" << "检测位置";
+    headherlist << "变电站名称" << "设备类型" << "电压等级" << "检测相别" << "检测位置";
 
     m_model = new QStandardItemModel(this);
     m_model -> setHorizontalHeaderLabels(headherlist);
