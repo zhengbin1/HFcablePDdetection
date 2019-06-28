@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport charts
 
@@ -31,6 +31,7 @@ SOURCES += \
         mainwindow.cpp \
         new_product_dialog.cpp \
         operation_file.cpp \
+        operation_sqlite.cpp \
         scatter_plot.cpp \
         trend_channel_widget.cpp \
         type_diagnosis_double_slider.cpp \
@@ -42,6 +43,7 @@ HEADERS += \
         mainwindow.h \
         new_product_dialog.h \
         operation_file.h \
+        operation_sqlite.h \
         scatter_plot.h \
         trend_channel_widget.h \
         type_diagnosis_double_slider.h \

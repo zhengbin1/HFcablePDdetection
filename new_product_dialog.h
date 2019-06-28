@@ -14,6 +14,10 @@
 #include <QTableView>
 #include <QHeaderView>
 #include <QStandardItemModel>
+#include <QMessageBox>
+
+#include "operation_sqlite.h"
+
 
 class NewProductDialog : public QDialog
 {
@@ -21,7 +25,6 @@ class NewProductDialog : public QDialog
 public:
     NewProductDialog(QWidget *parent = nullptr);
     ~NewProductDialog();
-    void paintEvent(QPaintEvent *);
 
 private:
     QLabel *pText1;
@@ -48,6 +51,9 @@ private:
 
     QHBoxLayout *m_HBoxLayout;
     QVBoxLayout *m_VBoxLayout;
+
+private slots:
+    void click_Decide_Button();
 };
 
 #endif // NEW_PRODUCT_DIALOG_H

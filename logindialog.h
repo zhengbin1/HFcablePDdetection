@@ -27,8 +27,8 @@ private:
     QPushButton *exitButton;
 
 private slots:
-    void on_login_click();
-    void on_exit_click();
+    void click_Login_Button();
+    void click_Exit_Button();
 };
 
 #endif // LOGINDIALOG_H

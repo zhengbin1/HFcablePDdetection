@@ -41,8 +41,8 @@ LoginDialog::LoginDialog(QWidget *parent) :
     loginButton -> move(1000, 500);
     exitButton -> move(1100, 500);
 
-    connect(loginButton, SIGNAL(clicked()), this, SLOT(on_login_click()));
-    connect(exitButton, SIGNAL(clicked()), this, SLOT(on_exit_click()));
+    connect(loginButton, SIGNAL(clicked()), this, SLOT(click_Login_Button()));
+    connect(exitButton, SIGNAL(clicked()), this, SLOT(click_Exit_Button()));
 }
 
 LoginDialog::~LoginDialog()
@@ -66,12 +66,12 @@ void LoginDialog::closeEvent(QCloseEvent *)
     QApplication::exit(0);
 }
 
-void LoginDialog::on_login_click()
+void LoginDialog::click_Login_Button()
 {
     accept();
 }
 
-void LoginDialog::on_exit_click()
+void LoginDialog::click_Exit_Button()
 {
     reject();
 }

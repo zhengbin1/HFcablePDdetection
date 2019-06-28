@@ -68,14 +68,17 @@ NewProductDialog::NewProductDialog(QWidget *parent):QDialog (parent)
     m_ComboBox3 -> insertItem(7, "1000kV");
 
     m_Decide_Button = new QPushButton(this);
-    m_Decide_Button -> setStyleSheet("background-color:#33ff99;");
+    m_Decide_Button -> setStyleSheet("background-color:#1bd1a5;");
     m_Decide_Button -> setText("确 定");
+
+    connect(m_Decide_Button, SIGNAL(clicked()), this, SLOT(click_Decide_Button()));
 
     m_TableView = new QTableView(this);
     m_TableView -> verticalHeader() -> setHidden(true);
     m_TableView -> horizontalHeader() -> setSectionResizeMode(QHeaderView::Stretch);
-    m_TableView -> horizontalHeader() -> setStyleSheet("QHeaderView::section{background-color:#000000;color:#FFFFFF;} QHeaderView::section:hover{background-color:#ffff00;}");
+    m_TableView -> horizontalHeader() -> setStyleSheet("QHeaderView::section{background-color:#000000;color:#FFFFFF;} QHeaderView::section:hover{background-color:#41555d;}");
     m_TableView -> setEditTriggers(QAbstractItemView::NoEditTriggers);
+    m_TableView -> setStyleSheet("color:#ffffff");
 
     QStringList headherlist;
     headherlist << "变电站名称" << "设备类型" << "电压等级" << "检测相别" << "检测位置";
@@ -83,7 +86,6 @@ NewProductDialog::NewProductDialog(QWidget *parent):QDialog (parent)
     m_model = new QStandardItemModel(this);
     m_model -> setHorizontalHeaderLabels(headherlist);
     m_model -> setColumnCount(headherlist.count());
-    m_model -> setRowCount(100);
 
     m_TableView -> setModel(m_model);
 
@@ -105,6 +107,11 @@ NewProductDialog::NewProductDialog(QWidget *parent):QDialog (parent)
     m_VBoxLayout -> addLayout(m_HBoxLayout);
     m_VBoxLayout -> addWidget(m_TableView);
     setLayout(m_VBoxLayout);
+
+    // 创建和连接数据库
+    OperationSqlite::ConnectDB("./project.db");
+    // 创建表
+    OperationSqlite::CreateTable("project");
 }
 
 NewProductDialog::~NewProductDialog()
@@ -132,7 +139,32 @@ NewProductDialog::~NewProductDialog()
     delete m_VBoxLayout;
 }
 
-void NewProductDialog::paintEvent(QPaintEvent *)
+void NewProductDialog::click_Decide_Button()
 {
+    QString strSubstation;  // 变电站名称
+    QString strDeviceType;  // 设备类型
+    QString strDetection;  // 检测相别
+    QString strVoltageGrade; // 电压等级
+    QString strPosition;  // 检测位置
 
+    if(strSubstation.isEmpty())
+    {
+        QMessageBox messagebox(QMessageBox::Warning, tr("提示"), tr("变电站名称不能为空！"));
+        messagebox.setStandardButtons(QMessageBox::Ok);
+        messagebox.setButtonText (QMessageBox::Ok, QString("确 定"));
+        messagebox.exec();
+    } else {
+        strSubstation = m_LineEdit1 -> text();
+        strDeviceType = m_ComboBox1 -> currentText();
+        strDetection = m_ComboBox2 -> currentText();
+        strVoltageGrade = m_ComboBox3 -> currentText();
+        strPosition = m_LineEdit2 -> text();
+
+        int rowcount = m_model -> rowCount();
+        m_model -> setItem(rowcount, 0, new QStandardItem(strSubstation));
+        m_model -> setItem(rowcount, 1, new QStandardItem(strDeviceType));
+        m_model -> setItem(rowcount, 2, new QStandardItem(strVoltageGrade));
+        m_model -> setItem(rowcount, 3, new QStandardItem(strDetection));
+        m_model -> setItem(rowcount, 4, new QStandardItem(strPosition));
+    }
 }
