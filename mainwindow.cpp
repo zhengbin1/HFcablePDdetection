@@ -86,6 +86,11 @@ MainWindow::MainWindow(QWidget *parent) :
     pNewProductDialog = new NewProductDialog(this);
     pNewProductDialog -> hide();
     connect(ui -> menu_1, SIGNAL(triggered(QAction *)), this, SLOT(triggerMenu(QAction *)));
+
+    // 创建和连接数据库
+    OperationSqlite::ConnectDB("./project.db");
+    // 创建表
+    OperationSqlite::CreateTable("project");
 }
 
 MainWindow::~MainWindow()

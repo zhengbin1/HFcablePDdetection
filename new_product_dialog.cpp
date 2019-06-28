@@ -80,12 +80,7 @@ NewProductDialog::NewProductDialog(QWidget *parent):QDialog (parent)
     m_TableView -> setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_TableView -> setStyleSheet("color:#ffffff");
 
-    QStringList headherlist;
-    headherlist << "变电站名称" << "设备类型" << "电压等级" << "检测相别" << "检测位置";
-
     m_model = new QStandardItemModel(this);
-    m_model -> setHorizontalHeaderLabels(headherlist);
-    m_model -> setColumnCount(headherlist.count());
 
     m_TableView -> setModel(m_model);
 
@@ -107,11 +102,6 @@ NewProductDialog::NewProductDialog(QWidget *parent):QDialog (parent)
     m_VBoxLayout -> addLayout(m_HBoxLayout);
     m_VBoxLayout -> addWidget(m_TableView);
     setLayout(m_VBoxLayout);
-
-    // 创建和连接数据库
-    OperationSqlite::ConnectDB("./project.db");
-    // 创建表
-    OperationSqlite::CreateTable("project");
 }
 
 NewProductDialog::~NewProductDialog()
@@ -139,6 +129,30 @@ NewProductDialog::~NewProductDialog()
     delete m_VBoxLayout;
 }
 
+void NewProductDialog::showEvent(QShowEvent *)
+{
+    m_model -> clear();
+
+    QStringList headherlist;
+    headherlist << "变电站名称" << "设备类型" << "电压等级" << "检测相别" << "检测位置";
+
+    m_model -> setHorizontalHeaderLabels(headherlist);
+    m_model -> setColumnCount(headherlist.count());
+
+    QSqlQuery query = OperationSqlite::selectShowAll();
+
+    while (query.next())
+    {
+        int rowcount = m_model -> rowCount();
+
+        m_model -> setItem(rowcount, 0, new QStandardItem(query.value(0).toString()));
+        m_model -> setItem(rowcount, 1, new QStandardItem(query.value(1).toString()));
+        m_model -> setItem(rowcount, 2, new QStandardItem(query.value(2).toString()));
+        m_model -> setItem(rowcount, 3, new QStandardItem(query.value(3).toString()));
+        m_model -> setItem(rowcount, 4, new QStandardItem(query.value(4).toString()));
+    }
+}
+
 void NewProductDialog::click_Decide_Button()
 {
     QString strSubstation;  // 变电站名称
@@ -147,6 +161,12 @@ void NewProductDialog::click_Decide_Button()
     QString strVoltageGrade; // 电压等级
     QString strPosition;  // 检测位置
 
+    strSubstation = m_LineEdit1 -> text();
+    strDeviceType = m_ComboBox1 -> currentText();
+    strDetection = m_ComboBox2 -> currentText();
+    strVoltageGrade = m_ComboBox3 -> currentText();
+    strPosition = m_LineEdit2 -> text();
+
     if(strSubstation.isEmpty())
     {
         QMessageBox messagebox(QMessageBox::Warning, tr("提示"), tr("变电站名称不能为空！"));
@@ -154,17 +174,14 @@ void NewProductDialog::click_Decide_Button()
         messagebox.setButtonText (QMessageBox::Ok, QString("确 定"));
         messagebox.exec();
     } else {
-        strSubstation = m_LineEdit1 -> text();
-        strDeviceType = m_ComboBox1 -> currentText();
-        strDetection = m_ComboBox2 -> currentText();
-        strVoltageGrade = m_ComboBox3 -> currentText();
-        strPosition = m_LineEdit2 -> text();
-
         int rowcount = m_model -> rowCount();
+
         m_model -> setItem(rowcount, 0, new QStandardItem(strSubstation));
         m_model -> setItem(rowcount, 1, new QStandardItem(strDeviceType));
         m_model -> setItem(rowcount, 2, new QStandardItem(strVoltageGrade));
         m_model -> setItem(rowcount, 3, new QStandardItem(strDetection));
         m_model -> setItem(rowcount, 4, new QStandardItem(strPosition));
+
+        OperationSqlite::insertRow(strSubstation, strDeviceType, strVoltageGrade, strDetection, strPosition);
     }
 }

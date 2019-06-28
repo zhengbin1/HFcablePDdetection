@@ -25,6 +25,7 @@ class NewProductDialog : public QDialog
 public:
     NewProductDialog(QWidget *parent = nullptr);
     ~NewProductDialog();
+    void showEvent(QShowEvent *event);
 
 private:
     QLabel *pText1;
