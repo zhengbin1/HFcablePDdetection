@@ -1,7 +1,7 @@
-#include "new_product_dialog.h"
+#include "new_project_dialog.h"
 #include <QDebug>
 
-NewProductDialog::NewProductDialog(QWidget *parent):QDialog (parent)
+NewProjectDialog::NewProjectDialog(QWidget *parent) : QDialog(parent)
 {
     Qt::WindowFlags flags = Qt::Dialog;
 
@@ -104,7 +104,7 @@ NewProductDialog::NewProductDialog(QWidget *parent):QDialog (parent)
     setLayout(m_VBoxLayout);
 }
 
-NewProductDialog::~NewProductDialog()
+NewProjectDialog::~NewProjectDialog()
 {
     delete pText1;
     delete pText2;
@@ -129,7 +129,7 @@ NewProductDialog::~NewProductDialog()
     delete m_VBoxLayout;
 }
 
-void NewProductDialog::showEvent(QShowEvent *)
+void NewProjectDialog::showEvent(QShowEvent *)
 {
     m_model -> clear();
 
@@ -153,7 +153,7 @@ void NewProductDialog::showEvent(QShowEvent *)
     }
 }
 
-void NewProductDialog::click_Decide_Button()
+void NewProjectDialog::click_Decide_Button()
 {
     QString strSubstation;  // 变电站名称
     QString strDeviceType;  // 设备类型

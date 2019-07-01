@@ -1,6 +1,6 @@
 #include "operation_sqlite.h"
 
-QSqlDatabase OperationSqlite::m_db = QSqlDatabase::addDatabase( "QSQLITE" );
+QSqlDatabase OperationSqlite::m_db = QSqlDatabase::addDatabase("QSQLITE");
 QString OperationSqlite::m_tablename = QString();
 
 bool OperationSqlite::ConnectDB(QString dbnameall)

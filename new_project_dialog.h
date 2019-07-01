@@ -19,15 +19,19 @@
 #include "operation_sqlite.h"
 
 
-class NewProductDialog : public QDialog
+class NewProjectDialog : public QDialog
 {
     Q_OBJECT
+
 public:
-    NewProductDialog(QWidget *parent = nullptr);
-    ~NewProductDialog();
-    void showEvent(QShowEvent *event);
+    NewProjectDialog(QWidget *parent = nullptr);
+    ~NewProjectDialog();
+    void showEvent(QShowEvent *);
 
 private:
+    int m_screen_width;
+    int m_screen_height;
+
     QLabel *pText1;
     QLabel *pText2;
     QLabel *pText3;
@@ -46,9 +50,6 @@ private:
 
     QTableView *m_TableView;
     QStandardItemModel *m_model;
-
-    int m_screen_width;
-    int m_screen_height;
 
     QHBoxLayout *m_HBoxLayout;
     QVBoxLayout *m_VBoxLayout;

@@ -44,7 +44,7 @@
      <string>定位</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menu_4">
+   <widget class="QMenu4" name="menu_4">
     <property name="title">
      <string>多源分离</string>
     </property>
@@ -99,6 +99,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QMenu4</class>
+   <extends>QMenu</extends>
+   <header>mainwindow_qmenu4.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

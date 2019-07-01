@@ -8,12 +8,14 @@
 #include <QPainter>
 #include <QSize>
 #include <QGridLayout>
+#include <QMouseEvent>
 
 #include "scatter_plot.h"
 #include "type_diagnosis_widget.h"
 #include "trend_channel_widget.h"
-#include "new_product_dialog.h"
 #include "operation_file.h"
+#include "project_manage_dialog.h"
+#include "new_project_dialog.h"
 
 
 namespace Ui {
@@ -48,11 +50,13 @@ private:
 
     QWidget *pCentralWidget;
 
-    NewProductDialog *pNewProductDialog;
+    NewProjectDialog *pNewProjectDialog;
+    ProjectManageDialog *pProjectManageDialog;
+
 
 private slots:
     void timerUpdate();
-    void triggerMenu(QAction *);
+    void triggerMenu1(QAction *);
 };
 
 #endif // MAINWINDOW_H

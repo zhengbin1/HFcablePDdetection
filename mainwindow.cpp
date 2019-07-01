@@ -83,9 +83,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     pCentralWidget -> setLayout(pGridLayout);
 
-    pNewProductDialog = new NewProductDialog(this);
-    pNewProductDialog -> hide();
-    connect(ui -> menu_1, SIGNAL(triggered(QAction *)), this, SLOT(triggerMenu(QAction *)));
+    pNewProjectDialog = new NewProjectDialog(this);
+    pNewProjectDialog -> hide();
+    pProjectManageDialog = new ProjectManageDialog(this);
+    pProjectManageDialog -> hide();
+    connect(ui -> menu_1, SIGNAL(triggered(QAction *)), this, SLOT(triggerMenu1(QAction *)));
 
     // 创建和连接数据库
     OperationSqlite::ConnectDB("./project.db");
@@ -111,7 +113,8 @@ MainWindow::~MainWindow()
 
     delete trendChannelWidget;
 
-    delete pNewProductDialog;
+    delete pNewProjectDialog;
+    delete pProjectManageDialog;
 }
 
 void MainWindow::timerUpdate()
@@ -121,10 +124,21 @@ void MainWindow::timerUpdate()
     text3 -> setText(str);
 }
 
-void MainWindow::triggerMenu(QAction *a)
+void MainWindow::triggerMenu1(QAction *a)
 {
     if(a -> objectName() == "action_1")
     {
-        pNewProductDialog -> show();
+        pNewProjectDialog -> show();
+    }
+    else if(a -> objectName() == "action_2")
+    {
+        pProjectManageDialog -> show();
+    }
+    else if(a -> objectName() == "action_3")
+    {
+    }
+    else if(a -> objectName() == "action_4")
+    {
+        QApplication::exit(0);
     }
 }

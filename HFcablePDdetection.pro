@@ -29,9 +29,12 @@ SOURCES += \
         logindialog.cpp \
         main.cpp \
         mainwindow.cpp \
-        new_product_dialog.cpp \
+        mainwindow_qmenu4.cpp \
+        multiple_source_separation.cpp \
+        new_project_dialog.cpp \
         operation_file.cpp \
         operation_sqlite.cpp \
+        project_manage_dialog.cpp \
         scatter_plot.cpp \
         trend_channel_widget.cpp \
         type_diagnosis_double_slider.cpp \
@@ -41,9 +44,12 @@ HEADERS += \
         library/qcustomplot/qcustomplot.h \
         logindialog.h \
         mainwindow.h \
-        new_product_dialog.h \
+        mainwindow_qmenu4.h \
+        multiple_source_separation.h \
+        new_project_dialog.h \
         operation_file.h \
         operation_sqlite.h \
+        project_manage_dialog.h \
         scatter_plot.h \
         trend_channel_widget.h \
         type_diagnosis_double_slider.h \
