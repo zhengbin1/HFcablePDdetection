@@ -6,9 +6,14 @@
 
 class QMenu4 : public QMenu
 {
+    Q_OBJECT
+
 public:
     QMenu4(QWidget *parent = nullptr);
     void mousePressEvent(QMouseEvent *);
+
+signals:
+    void clicked();
 };
 
 #endif // MAINWINDOW_QMENU4_H

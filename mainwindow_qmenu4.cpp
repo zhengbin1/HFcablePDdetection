@@ -8,4 +8,5 @@ QMenu4::QMenu4(QWidget *parent) : QMenu(parent)
 
 void QMenu4::mousePressEvent(QMouseEvent *)
 {
+    emit clicked();
 }

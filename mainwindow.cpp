@@ -87,7 +87,11 @@ MainWindow::MainWindow(QWidget *parent) :
     pNewProjectDialog -> hide();
     pProjectManageDialog = new ProjectManageDialog(this);
     pProjectManageDialog -> hide();
+    pMSSeparationDialog = new MSSeparationDialog(this);
+    pMSSeparationDialog -> hide();
+
     connect(ui -> menu_1, SIGNAL(triggered(QAction *)), this, SLOT(triggerMenu1(QAction *)));
+    connect(ui -> menu_4, SIGNAL(clicked()), this, SLOT(menu4clicked()));
 
     // 创建和连接数据库
     OperationSqlite::ConnectDB("./project.db");
@@ -115,6 +119,7 @@ MainWindow::~MainWindow()
 
     delete pNewProjectDialog;
     delete pProjectManageDialog;
+    delete pMSSeparationDialog;
 }
 
 void MainWindow::timerUpdate()
@@ -141,4 +146,9 @@ void MainWindow::triggerMenu1(QAction *a)
     {
         QApplication::exit(0);
     }
+}
+
+void MainWindow::menu4clicked()
+{
+    pMSSeparationDialog -> exec();
 }

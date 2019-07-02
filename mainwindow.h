@@ -16,6 +16,7 @@
 #include "operation_file.h"
 #include "project_manage_dialog.h"
 #include "new_project_dialog.h"
+#include "multiple_source_separation.h"
 
 
 namespace Ui {
@@ -52,11 +53,12 @@ private:
 
     NewProjectDialog *pNewProjectDialog;
     ProjectManageDialog *pProjectManageDialog;
-
+    MSSeparationDialog *pMSSeparationDialog;
 
 private slots:
     void timerUpdate();
     void triggerMenu1(QAction *);
+    void menu4clicked();
 };
 
 #endif // MAINWINDOW_H
