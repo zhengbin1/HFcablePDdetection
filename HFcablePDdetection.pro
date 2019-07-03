@@ -29,7 +29,6 @@ SOURCES += \
         logindialog.cpp \
         main.cpp \
         mainwindow.cpp \
-        mainwindow_qmenu4.cpp \
         multiple_source_separation.cpp \
         new_project_dialog.cpp \
         operation_file.cpp \
@@ -44,7 +43,6 @@ HEADERS += \
         library/qcustomplot/qcustomplot.h \
         logindialog.h \
         mainwindow.h \
-        mainwindow_qmenu4.h \
         multiple_source_separation.h \
         new_project_dialog.h \
         operation_file.h \

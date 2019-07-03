@@ -91,7 +91,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pMSSeparationDialog -> hide();
 
     connect(ui -> menu_1, SIGNAL(triggered(QAction *)), this, SLOT(triggerMenu1(QAction *)));
-    connect(ui -> menu_4, SIGNAL(clicked()), this, SLOT(menu4clicked()));
+    connect(ui -> menu_4, SIGNAL(triggered(QAction *)), this, SLOT(triggerMenu4(QAction *)));
 
     // 创建和连接数据库
     OperationSqlite::ConnectDB("./project.db");
@@ -148,7 +148,10 @@ void MainWindow::triggerMenu1(QAction *a)
     }
 }
 
-void MainWindow::menu4clicked()
+void MainWindow::triggerMenu4(QAction *a)
 {
-    pMSSeparationDialog -> exec();
+    if(a -> objectName() == "action_7")
+    {
+        pMSSeparationDialog -> exec();
+    }
 }

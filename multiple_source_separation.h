@@ -10,6 +10,42 @@
 #include <QLabel>
 #include <QComboBox>
 #include <QPushButton>
+#include <QtCharts>
+#include <QTime>
+
+QT_CHARTS_USE_NAMESPACE
+
+class MScatterPlot : public QChartView
+{
+public:
+    MScatterPlot(QWidget *parent = nullptr);
+    ~MScatterPlot();
+    // void timerEvent(QTimerEvent *);
+    void paintEvent(QPaintEvent *);
+
+    void mousePressEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
+    void mouseReleaseEvent(QMouseEvent *);
+
+private:
+    int m_posX = 0;
+    int m_posY = 0;
+
+    int m_pos_start_X = 0;  // 鼠标开始的X位置
+    int m_pos_start_Y = 0;  // 鼠标开始的Y位置
+
+    int m_pos_end_X = 0;  // 鼠标结束的X位置
+    int m_pos_end_Y = 0;  // 鼠标结束的Y位置
+
+    bool m_clicked = false;  // 判断鼠标是否在移动
+
+    QValueAxis *m_axisX;
+    QValueAxis *m_axisY;
+
+    QScatterSeries *m_Scatter_Red;
+    QScatterSeries *m_Scatter_Green;
+    QScatterSeries *m_Scatter_Yellow;
+};
 
 class ColorSignWidget : public QWidget
 {
@@ -51,7 +87,9 @@ private:
 
     QLabel *pCaption;
 
+    MScatterPlot *pMScatterPlotMain;
     ColorSignWidget *pColorSignWidget;
+
     QVBoxLayout *pVBoxLayoutMain;
     QHBoxLayout *pHBoxLayout_1;
 };

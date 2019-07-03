@@ -58,7 +58,7 @@ private:
 private slots:
     void timerUpdate();
     void triggerMenu1(QAction *);
-    void menu4clicked();
+    void triggerMenu4(QAction *);
 };
 
 #endif // MAINWINDOW_H

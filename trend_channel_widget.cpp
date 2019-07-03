@@ -92,18 +92,18 @@ void QCPLine1::timerEvent(QTimerEvent *)
 
 void QCPLine1::QCPMoveEvent(QMouseEvent *event)
 {
-    //获取鼠标坐标，相对父窗体坐标
+    // 获取鼠标坐标，相对父窗体坐标
     int posX = event -> pos().x();
     int posY = event -> pos().y();
 
-    //鼠标坐标转化为CustomPlot内部坐标
+    // 鼠标坐标转化为CustomPlot内部坐标
     int val_time_X = static_cast<int>(m_Plot -> xAxis -> pixelToCoord(posX));
     double val_Y = m_Plot -> yAxis -> pixelToCoord(posY);
 
-    //获得x轴坐标位置对应的曲线上y的值
+    // 获得x轴坐标位置对应的曲线上y的值
     double lineY_Val = m_Plot -> graph(0) -> data() -> at(static_cast<int>(val_time_X)) -> value;
 
-    //曲线的上点坐标位置，用来显示QToolTip提示框
+    // 曲线的上点坐标位置，用来显示QToolTip提示框
     int out_X = static_cast<int>(m_Plot -> xAxis -> coordToPixel(val_time_X));
     int out_Y = static_cast<int>(m_Plot -> yAxis -> coordToPixel(lineY_Val));
 
