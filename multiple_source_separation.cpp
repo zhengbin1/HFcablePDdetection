@@ -48,7 +48,15 @@ MScatterPlot::MScatterPlot(QWidget *parent): QChartView(new QChart(), parent)
     chart() -> addAxis(m_axisX, Qt::AlignBottom);
     chart() -> addAxis(m_axisY, Qt::AlignLeft);
 
-    // startTimer(1000);
+    m_Scatter_Red -> attachAxis(m_axisX);
+    m_Scatter_Red -> attachAxis(m_axisY);
+    m_Scatter_Green -> attachAxis(m_axisX);
+    m_Scatter_Green -> attachAxis(m_axisY);
+    m_Scatter_Yellow -> attachAxis(m_axisX);
+    m_Scatter_Yellow -> attachAxis(m_axisY);
+
+
+    startTimer(1000);
 }
 
 MScatterPlot::~MScatterPlot()
@@ -232,6 +240,29 @@ void MScatterPlot::mouseReleaseEvent(QMouseEvent *e)
 }
 
 
+void MScatterPlot::timerEvent(QTimerEvent *)
+{
+    m_Scatter_Red -> clear();
+    m_Scatter_Green -> clear();
+    m_Scatter_Yellow -> clear();
+
+    qsrand(static_cast<unsigned int>(QTime(0,0,0).secsTo(QTime::currentTime())));
+
+    for (int i = 0;i < 1000; i++) {
+        int x = qrand() % 50;
+        int y = qrand() % 50;
+
+        if(x < 20){
+            *m_Scatter_Yellow << QPointF(x, y);
+        } else if ((x > 20) && (x < 40)) {
+            *m_Scatter_Green << QPointF(x, y);
+        } else if (x > 40) {
+            *m_Scatter_Red << QPointF(x, y);
+        }
+    }
+}
+
+
 ColorSignWidget::ColorSignWidget(QWidget *parent) : QWidget(parent)
 {
     setStyleSheet("background-color: #000000;");
@@ -310,6 +341,60 @@ void ColorSignWidget::paintEvent(QPaintEvent *e)
     QWidget::paintEvent(e);
 }
 
+ClusterChoice::ClusterChoice(QWidget *parent) : QWidget(parent)
+{
+    setStyleSheet("background-color: #000000;");
+
+    pCaption = new QPushButton;
+    pCaption -> setStyleSheet("color: #FFFFFF;");
+    pCaption -> setText("聚类选择");
+
+    m_Start_Button = new QPushButton;
+    m_refresh_Button = new QPushButton;
+    m_MSSeparation_Button = new QPushButton;
+    m_Save_Button = new QPushButton;
+    m_Cancel_Button = new QPushButton;
+
+    m_Start_Button -> setText("开 始");
+    m_Start_Button -> setStyleSheet("background-color: #CCCCCC;");
+    m_refresh_Button -> setText("刷 新");
+    m_refresh_Button -> setStyleSheet("background-color: #CCCCCC;");
+    m_MSSeparation_Button -> setText("多源分离");
+    m_MSSeparation_Button -> setStyleSheet("background-color: #CCCCCC;");
+    m_Save_Button -> setText("保 存");
+    m_Save_Button -> setStyleSheet("background-color: #CCCCCC;");
+    m_Cancel_Button -> setText("取 消");
+    m_Cancel_Button -> setStyleSheet("background-color: #CCCCCC;");
+
+    pVBoxLayout = new QVBoxLayout;
+    pVBoxLayout -> addWidget(pCaption, 1);
+    pVBoxLayout -> addWidget(m_Start_Button, 1);
+    pVBoxLayout -> addWidget(m_refresh_Button, 1);
+    pVBoxLayout -> addWidget(m_MSSeparation_Button, 1);
+    pVBoxLayout -> addWidget(m_Save_Button, 1);
+    pVBoxLayout -> addWidget(m_Cancel_Button, 1);
+
+    setLayout(pVBoxLayout);
+}
+
+ClusterChoice::~ClusterChoice()
+{
+    delete pCaption;
+    delete m_Start_Button;
+    delete m_refresh_Button;
+    delete m_MSSeparation_Button;
+    delete m_Save_Button;
+    delete m_Cancel_Button;
+}
+
+void ClusterChoice::paintEvent(QPaintEvent *e)
+{
+    QStyleOption opt;
+    opt.initFrom(this);
+    QPainter p(this);
+    style() -> drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    QWidget::paintEvent(e);
+}
 
 MSSeparationDialog::MSSeparationDialog(QWidget *parent) : QDialog(parent)
 {
@@ -332,14 +417,16 @@ MSSeparationDialog::MSSeparationDialog(QWidget *parent) : QDialog(parent)
     resize(m_screen_width / 2, m_screen_height / 2);
 
     pCaption = new QLabel();
-    pCaption -> setText("<p style=\"color:#00BFFF;font-size:20px;text-align:center;\">多 源 分 离</p>");
+    pCaption -> setText("<p style=\"color:#00BFFF;font-size:25px;text-align:center;\">多 源 分 离</p>");
 
     pMScatterPlotMain = new MScatterPlot();
     pColorSignWidget = new ColorSignWidget();
+    pClusterChoice = new ClusterChoice();
 
     pHBoxLayout_1 = new QHBoxLayout();
     pHBoxLayout_1 -> addWidget(pColorSignWidget, 1);
-    pHBoxLayout_1 -> addWidget(pMScatterPlotMain, 5);
+    pHBoxLayout_1 -> addWidget(pMScatterPlotMain, 7);
+    pHBoxLayout_1 -> addWidget(pClusterChoice, 1);
 
     pVBoxLayoutMain = new QVBoxLayout();
     pVBoxLayoutMain -> addWidget(pCaption, 1);
@@ -354,6 +441,7 @@ MSSeparationDialog::~MSSeparationDialog()
 
     delete pMScatterPlotMain;
     delete pColorSignWidget;
+    delete pClusterChoice;
 
     delete pHBoxLayout_1;
     delete pVBoxLayoutMain;

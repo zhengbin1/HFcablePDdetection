@@ -20,7 +20,7 @@ class MScatterPlot : public QChartView
 public:
     MScatterPlot(QWidget *parent = nullptr);
     ~MScatterPlot();
-    // void timerEvent(QTimerEvent *);
+    void timerEvent(QTimerEvent *);
     void paintEvent(QPaintEvent *);
 
     void mousePressEvent(QMouseEvent *);
@@ -74,6 +74,27 @@ private:
     QLabel *m_Text_PRPD5;
 };
 
+class ClusterChoice : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit ClusterChoice(QWidget *parent = nullptr);
+    ~ClusterChoice();
+
+    void paintEvent(QPaintEvent *);
+
+private:
+    QPushButton *pCaption;
+    QPushButton *m_Start_Button;
+    QPushButton *m_refresh_Button;
+    QPushButton *m_MSSeparation_Button;
+    QPushButton *m_Save_Button;
+    QPushButton *m_Cancel_Button;
+
+    QVBoxLayout *pVBoxLayout;
+};
+
 class MSSeparationDialog : public QDialog
 {
     Q_OBJECT
@@ -90,6 +111,7 @@ private:
 
     MScatterPlot *pMScatterPlotMain;
     ColorSignWidget *pColorSignWidget;
+    ClusterChoice *pClusterChoice;
 
     QVBoxLayout *pVBoxLayoutMain;
     QHBoxLayout *pHBoxLayout_1;

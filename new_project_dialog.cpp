@@ -68,7 +68,7 @@ NewProjectDialog::NewProjectDialog(QWidget *parent) : QDialog(parent)
     m_ComboBox3 -> insertItem(7, "1000kV");
 
     m_Decide_Button = new QPushButton(this);
-    m_Decide_Button -> setStyleSheet("background-color:#1bd1a5;");
+    m_Decide_Button -> setStyleSheet("background-color: #1bd1a5;");
     m_Decide_Button -> setText("确 定");
 
     connect(m_Decide_Button, SIGNAL(clicked()), this, SLOT(click_Decide_Button()));
