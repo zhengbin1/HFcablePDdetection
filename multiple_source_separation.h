@@ -28,16 +28,17 @@ public:
     void mouseReleaseEvent(QMouseEvent *);
 
 private:
-    int m_posX = 0;
-    int m_posY = 0;
 
-    int m_pos_start_X = 0;  // 鼠标开始的X位置
-    int m_pos_start_Y = 0;  // 鼠标开始的Y位置
+    int m_rect_num = 1;  // 第几个矩形
 
-    int m_pos_end_X = 0;  // 鼠标结束的X位置
-    int m_pos_end_Y = 0;  // 鼠标结束的Y位置
+    int m_pos_start_X[5] = {0};  // 鼠标开始的X位置
+    int m_pos_start_Y[5] = {0};  // 鼠标开始的Y位置
+
+    int m_pos_end_X[5] = {0};  // 鼠标结束的X位置
+    int m_pos_end_Y[5] = {0};  // 鼠标结束的Y位置
 
     bool m_clicked = false;  // 判断鼠标是否在移动
+    bool m_PRPD1to5_Draw[5] = {false};  // 判断是否绘制矩形圈选框
 
     QValueAxis *m_axisX;
     QValueAxis *m_axisY;

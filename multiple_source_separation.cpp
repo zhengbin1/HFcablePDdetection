@@ -65,51 +65,170 @@ void MScatterPlot::paintEvent(QPaintEvent *e)
 {
     QChartView::paintEvent(e);
 
-    QPainter painter(this -> viewport());
-    QPen pen;
-    pen.setColor(QColor(0, 255, 0));
-    QBrush brush(QColor(0, 255, 0, 100));
-    painter.setPen(pen);
-    painter.setBrush(brush);
-    painter.drawRect(50, 50, 200, 100);
+
+    if(m_PRPD1to5_Draw[0] == true)
+    {
+        QPainter painter(this -> viewport());
+        QPen pen;
+        pen.setColor(QColor(255, 0, 0));
+        QBrush brush(QColor(255, 0, 0, 100));
+        painter.setPen(pen);
+        painter.setBrush(brush);
+        painter.drawRect(m_pos_start_X[0], m_pos_start_Y[0], m_pos_end_X[0] - m_pos_start_X[0], m_pos_end_Y[0] - m_pos_start_Y[0]);
+    }
+    if(m_PRPD1to5_Draw[1] == true)
+    {
+        QPainter painter(this -> viewport());
+        QPen pen;
+        pen.setColor(QColor(255, 165, 0));
+        QBrush brush(QColor(255, 165, 0, 100));
+        painter.setPen(pen);
+        painter.setBrush(brush);
+        painter.drawRect(m_pos_start_X[1], m_pos_start_Y[1], m_pos_end_X[1] - m_pos_start_X[1], m_pos_end_Y[1] - m_pos_start_Y[1]);
+    }
+    if(m_PRPD1to5_Draw[2] == true)
+    {
+        QPainter painter(this -> viewport());
+        QPen pen;
+        pen.setColor(QColor(255, 255, 0));
+        QBrush brush(QColor(255, 255, 0, 100));
+        painter.setPen(pen);
+        painter.setBrush(brush);
+        painter.drawRect(m_pos_start_X[2], m_pos_start_Y[2], m_pos_end_X[2] - m_pos_start_X[2], m_pos_end_Y[2] - m_pos_start_Y[2]);
+    }
+    if(m_PRPD1to5_Draw[3] == true)
+    {
+        QPainter painter(this -> viewport());
+        QPen pen;
+        pen.setColor(QColor(128, 0, 128));
+        QBrush brush(QColor(128, 0, 128, 100));
+        painter.setPen(pen);
+        painter.setBrush(brush);
+        painter.drawRect(m_pos_start_X[3], m_pos_start_Y[3], m_pos_end_X[3] - m_pos_start_X[3], m_pos_end_Y[3] - m_pos_start_Y[3]);
+    }
+    if(m_PRPD1to5_Draw[4] == true)
+    {
+        QPainter painter(this -> viewport());
+        QPen pen;
+        pen.setColor(QColor(0, 0, 255));
+        QBrush brush(QColor(0, 0, 255, 100));
+        painter.setPen(pen);
+        painter.setBrush(brush);
+        painter.drawRect(m_pos_start_X[4], m_pos_start_Y[4], m_pos_end_X[4] - m_pos_start_X[4], m_pos_end_Y[4] - m_pos_start_Y[4]);
+    }
+
 }
 
 void MScatterPlot::mousePressEvent(QMouseEvent *e)
 {
-    m_clicked = true;
+    if(m_rect_num <= 5)
+    {
+        switch (m_rect_num)
+        {
+        case 1:
+            m_PRPD1to5_Draw[0] = true;
+            m_pos_start_X[0] = e -> pos().x();
+            m_pos_start_Y[0] = e -> pos().y();
+            break;
+        case 2:
+            m_PRPD1to5_Draw[1] = true;
+            m_pos_start_X[1] = e -> pos().x();
+            m_pos_start_Y[1] = e -> pos().y();
+            break;
+        case 3:
+            m_PRPD1to5_Draw[2] = true;
+            m_pos_start_X[2] = e -> pos().x();
+            m_pos_start_Y[2] = e -> pos().y();
+            break;
+        case 4:
+            m_PRPD1to5_Draw[3] = true;
+            m_pos_start_X[3] = e -> pos().x();
+            m_pos_start_Y[3] = e -> pos().y();
+            break;
+        case 5:
+            m_PRPD1to5_Draw[4] = true;
+            m_pos_start_X[4] = e -> pos().x();
+            m_pos_start_Y[4] = e -> pos().y();
+            break;
+        }
 
-    m_posX = e -> pos().x();
-    m_posY = e -> pos().y();
-
-    m_pos_start_X = m_posX;
-    m_pos_start_Y = m_posY;
-
-    qDebug() << "Start X:" << m_posX;
-    qDebug() << "Start Y:" << m_posY;
-
+        m_clicked = true;
+    } else {
+        m_clicked = false;
+    }
 }
 
 void MScatterPlot::mouseMoveEvent(QMouseEvent *e)
 {
     if(m_clicked == true)
     {
-        m_posX = e -> pos().x();
-        m_posY = e -> pos().y();
+        switch (m_rect_num)
+        {
+        case 1:
+            m_PRPD1to5_Draw[0] = true;
+            m_pos_end_X[0] = e -> pos().x();
+            m_pos_end_Y[0] = e -> pos().y();
+            break;
+        case 2:
+            m_PRPD1to5_Draw[1] = true;
+            m_pos_end_X[1] = e -> pos().x();
+            m_pos_end_Y[1] = e -> pos().y();
+            break;
+        case 3:
+            m_PRPD1to5_Draw[2] = true;
+            m_pos_end_X[2] = e -> pos().x();
+            m_pos_end_Y[2] = e -> pos().y();
+            break;
+        case 4:
+            m_PRPD1to5_Draw[3] = true;
+            m_pos_end_X[3] = e -> pos().x();
+            m_pos_end_Y[3] = e -> pos().y();
+            break;
+        case 5:
+            m_PRPD1to5_Draw[4] = true;
+            m_pos_end_X[4] = e -> pos().x();
+            m_pos_end_Y[4] = e -> pos().y();
+            break;
+        }
     }
+
+    update();
 }
 
 void MScatterPlot::mouseReleaseEvent(QMouseEvent *e)
 {
+    switch (m_rect_num)
+    {
+    case 1:
+        m_pos_end_X[0] = e -> pos().x();
+        m_pos_end_Y[0] = e -> pos().y();
+        break;
+    case 2:
+        m_pos_end_X[1] = e -> pos().x();
+        m_pos_end_Y[1] = e -> pos().y();
+        break;
+    case 3:
+        m_pos_end_X[2] = e -> pos().x();
+        m_pos_end_Y[2] = e -> pos().y();
+        break;
+    case 4:
+        m_pos_end_X[3] = e -> pos().x();
+        m_pos_end_Y[3] = e -> pos().y();
+        break;
+    case 5:
+        m_pos_end_X[4] = e -> pos().x();
+        m_pos_end_Y[4] = e -> pos().y();
+        break;
+    }
+
     m_clicked = false;
 
-    m_posX = e -> pos().x();
-    m_posY = e -> pos().y();
+    if(m_rect_num <= 5)
+    {
+        m_rect_num ++;
+    }
 
-    m_pos_end_X = m_posX;
-    m_pos_end_Y = m_posY;
-
-    qDebug() << "End X:" << m_posX;
-    qDebug() << "End Y:" << m_posY;
+    update();
 }
 
 
@@ -213,7 +332,7 @@ MSSeparationDialog::MSSeparationDialog(QWidget *parent) : QDialog(parent)
     resize(m_screen_width / 2, m_screen_height / 2);
 
     pCaption = new QLabel();
-    pCaption -> setText("<p style=\"color:#000000;font-size:20px;text-align:center;\">多 源 分 离</p>");
+    pCaption -> setText("<p style=\"color:#00BFFF;font-size:20px;text-align:center;\">多 源 分 离</p>");
 
     pMScatterPlotMain = new MScatterPlot();
     pColorSignWidget = new ColorSignWidget();
