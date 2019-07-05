@@ -82,7 +82,7 @@ void MScatterPlot::paintEvent(QPaintEvent *e)
         QBrush brush(QColor(255, 0, 0, 100));
         painter.setPen(pen);
         painter.setBrush(brush);
-        painter.drawRect(m_pos_start_X[0], m_pos_start_Y[0], m_pos_end_X[0] - m_pos_start_X[0], m_pos_end_Y[0] - m_pos_start_Y[0]);
+        painter.drawRect(pointXY[0].pos_start_X, pointXY[0].pos_start_Y, pointXY[0].pos_end_X - pointXY[0].pos_start_X, pointXY[0].pos_end_Y - pointXY[0].pos_start_Y);
     }
     if(m_PRPD1to5_Draw[1] == true)
     {
@@ -92,7 +92,7 @@ void MScatterPlot::paintEvent(QPaintEvent *e)
         QBrush brush(QColor(255, 165, 0, 100));
         painter.setPen(pen);
         painter.setBrush(brush);
-        painter.drawRect(m_pos_start_X[1], m_pos_start_Y[1], m_pos_end_X[1] - m_pos_start_X[1], m_pos_end_Y[1] - m_pos_start_Y[1]);
+        painter.drawRect(pointXY[1].pos_start_X, pointXY[1].pos_start_Y, pointXY[1].pos_end_X - pointXY[1].pos_start_X, pointXY[1].pos_end_Y - pointXY[1].pos_start_Y);
     }
     if(m_PRPD1to5_Draw[2] == true)
     {
@@ -102,7 +102,7 @@ void MScatterPlot::paintEvent(QPaintEvent *e)
         QBrush brush(QColor(255, 255, 0, 100));
         painter.setPen(pen);
         painter.setBrush(brush);
-        painter.drawRect(m_pos_start_X[2], m_pos_start_Y[2], m_pos_end_X[2] - m_pos_start_X[2], m_pos_end_Y[2] - m_pos_start_Y[2]);
+        painter.drawRect(pointXY[2].pos_start_X, pointXY[2].pos_start_Y, pointXY[2].pos_end_X - pointXY[2].pos_start_X, pointXY[2].pos_end_Y - pointXY[2].pos_start_Y);
     }
     if(m_PRPD1to5_Draw[3] == true)
     {
@@ -112,7 +112,7 @@ void MScatterPlot::paintEvent(QPaintEvent *e)
         QBrush brush(QColor(128, 0, 128, 100));
         painter.setPen(pen);
         painter.setBrush(brush);
-        painter.drawRect(m_pos_start_X[3], m_pos_start_Y[3], m_pos_end_X[3] - m_pos_start_X[3], m_pos_end_Y[3] - m_pos_start_Y[3]);
+        painter.drawRect(pointXY[3].pos_start_X, pointXY[3].pos_start_Y, pointXY[3].pos_end_X - pointXY[3].pos_start_X, pointXY[3].pos_end_Y - pointXY[3].pos_start_Y);
     }
     if(m_PRPD1to5_Draw[4] == true)
     {
@@ -122,7 +122,7 @@ void MScatterPlot::paintEvent(QPaintEvent *e)
         QBrush brush(QColor(0, 0, 255, 100));
         painter.setPen(pen);
         painter.setBrush(brush);
-        painter.drawRect(m_pos_start_X[4], m_pos_start_Y[4], m_pos_end_X[4] - m_pos_start_X[4], m_pos_end_Y[4] - m_pos_start_Y[4]);
+        painter.drawRect(pointXY[4].pos_start_X, pointXY[4].pos_start_Y, pointXY[4].pos_end_X - pointXY[4].pos_start_X, pointXY[4].pos_end_Y - pointXY[4].pos_start_Y);
     }
 
 }
@@ -135,28 +135,28 @@ void MScatterPlot::mousePressEvent(QMouseEvent *e)
         {
         case 1:
             m_PRPD1to5_Draw[0] = true;
-            m_pos_start_X[0] = e -> pos().x();
-            m_pos_start_Y[0] = e -> pos().y();
+            pointXY[0].pos_start_X = e -> pos().x();
+            pointXY[0].pos_start_Y = e -> pos().y();
             break;
         case 2:
             m_PRPD1to5_Draw[1] = true;
-            m_pos_start_X[1] = e -> pos().x();
-            m_pos_start_Y[1] = e -> pos().y();
+            pointXY[1].pos_start_X = e -> pos().x();
+            pointXY[1].pos_start_Y = e -> pos().y();
             break;
         case 3:
             m_PRPD1to5_Draw[2] = true;
-            m_pos_start_X[2] = e -> pos().x();
-            m_pos_start_Y[2] = e -> pos().y();
+            pointXY[2].pos_start_X = e -> pos().x();
+            pointXY[2].pos_start_Y = e -> pos().y();
             break;
         case 4:
             m_PRPD1to5_Draw[3] = true;
-            m_pos_start_X[3] = e -> pos().x();
-            m_pos_start_Y[3] = e -> pos().y();
+            pointXY[3].pos_start_X = e -> pos().x();
+            pointXY[3].pos_start_Y = e -> pos().y();
             break;
         case 5:
             m_PRPD1to5_Draw[4] = true;
-            m_pos_start_X[4] = e -> pos().x();
-            m_pos_start_Y[4] = e -> pos().y();
+            pointXY[4].pos_start_X = e -> pos().x();
+            pointXY[4].pos_start_Y = e -> pos().y();
             break;
         }
 
@@ -174,28 +174,28 @@ void MScatterPlot::mouseMoveEvent(QMouseEvent *e)
         {
         case 1:
             m_PRPD1to5_Draw[0] = true;
-            m_pos_end_X[0] = e -> pos().x();
-            m_pos_end_Y[0] = e -> pos().y();
+            pointXY[0].pos_end_X = e -> pos().x();
+            pointXY[0].pos_end_Y = e -> pos().y();
             break;
         case 2:
             m_PRPD1to5_Draw[1] = true;
-            m_pos_end_X[1] = e -> pos().x();
-            m_pos_end_Y[1] = e -> pos().y();
+            pointXY[1].pos_end_X = e -> pos().x();
+            pointXY[1].pos_end_Y = e -> pos().y();
             break;
         case 3:
             m_PRPD1to5_Draw[2] = true;
-            m_pos_end_X[2] = e -> pos().x();
-            m_pos_end_Y[2] = e -> pos().y();
+            pointXY[2].pos_end_X = e -> pos().x();
+            pointXY[2].pos_end_Y = e -> pos().y();
             break;
         case 4:
             m_PRPD1to5_Draw[3] = true;
-            m_pos_end_X[3] = e -> pos().x();
-            m_pos_end_Y[3] = e -> pos().y();
+            pointXY[3].pos_end_X = e -> pos().x();
+            pointXY[3].pos_end_Y = e -> pos().y();
             break;
         case 5:
             m_PRPD1to5_Draw[4] = true;
-            m_pos_end_X[4] = e -> pos().x();
-            m_pos_end_Y[4] = e -> pos().y();
+            pointXY[4].pos_end_X = e -> pos().x();
+            pointXY[4].pos_end_Y = e -> pos().y();
             break;
         }
     }
@@ -208,24 +208,44 @@ void MScatterPlot::mouseReleaseEvent(QMouseEvent *e)
     switch (m_rect_num)
     {
     case 1:
-        m_pos_end_X[0] = e -> pos().x();
-        m_pos_end_Y[0] = e -> pos().y();
+        pointXY[0].pos_end_X = e -> pos().x();
+        pointXY[0].pos_end_Y = e -> pos().y();
+        pointXY[0].series_start_X = chart() -> mapToValue(QPointF(pointXY[0].pos_start_X, pointXY[0].pos_start_Y)).x();
+        pointXY[0].series_start_Y = chart() -> mapToValue(QPointF(pointXY[0].pos_start_X, pointXY[0].pos_start_Y)).y();
+        pointXY[0].series_end_X = chart() -> mapToValue(QPointF(pointXY[0].pos_end_X, pointXY[0].pos_end_Y)).x();
+        pointXY[0].series_end_Y = chart() -> mapToValue(QPointF(pointXY[0].pos_end_X, pointXY[0].pos_end_Y)).y();
         break;
     case 2:
-        m_pos_end_X[1] = e -> pos().x();
-        m_pos_end_Y[1] = e -> pos().y();
+        pointXY[1].pos_end_X = e -> pos().x();
+        pointXY[1].pos_end_Y = e -> pos().y();
+        pointXY[1].series_start_X = chart() -> mapToValue(QPointF(pointXY[1].pos_start_X, 0)).x();
+        pointXY[1].series_start_Y = chart() -> mapToValue(QPointF(0, pointXY[1].pos_start_Y)).y();
+        pointXY[1].series_end_X = chart() -> mapToValue(QPointF(pointXY[1].pos_end_X, 0)).x();
+        pointXY[1].series_end_Y = chart() -> mapToValue(QPointF(0, pointXY[1].pos_end_Y)).y();
         break;
     case 3:
-        m_pos_end_X[2] = e -> pos().x();
-        m_pos_end_Y[2] = e -> pos().y();
+        pointXY[2].pos_end_X = e -> pos().x();
+        pointXY[2].pos_end_Y = e -> pos().y();
+        pointXY[2].series_start_X = chart() -> mapToValue(QPointF(pointXY[2].pos_start_X, pointXY[2].pos_start_Y)).x();
+        pointXY[2].series_start_Y = chart() -> mapToValue(QPointF(pointXY[2].pos_start_X, pointXY[2].pos_start_Y)).y();
+        pointXY[2].series_end_X = chart() -> mapToValue(QPointF(pointXY[2].pos_end_X, pointXY[2].pos_end_Y)).x();
+        pointXY[2].series_end_Y = chart() -> mapToValue(QPointF(pointXY[2].pos_end_X, pointXY[2].pos_end_Y)).y();
         break;
     case 4:
-        m_pos_end_X[3] = e -> pos().x();
-        m_pos_end_Y[3] = e -> pos().y();
+        pointXY[3].pos_end_X = e -> pos().x();
+        pointXY[3].pos_end_Y = e -> pos().y();
+        pointXY[3].series_start_X = chart() -> mapToValue(QPointF(pointXY[3].pos_start_X, pointXY[3].pos_start_Y)).x();
+        pointXY[3].series_start_Y = chart() -> mapToValue(QPointF(pointXY[3].pos_start_X, pointXY[3].pos_start_Y)).y();
+        pointXY[3].series_end_X = chart() -> mapToValue(QPointF(pointXY[3].pos_end_X, pointXY[3].pos_end_Y)).x();
+        pointXY[3].series_end_Y = chart() -> mapToValue(QPointF(pointXY[3].pos_end_X, pointXY[3].pos_end_Y)).y();
         break;
     case 5:
-        m_pos_end_X[4] = e -> pos().x();
-        m_pos_end_Y[4] = e -> pos().y();
+        pointXY[4].pos_end_X = e -> pos().x();
+        pointXY[4].pos_end_Y = e -> pos().y();
+        pointXY[4].series_start_X = chart() -> mapToValue(QPointF(pointXY[4].pos_start_X, pointXY[4].pos_start_Y)).x();
+        pointXY[4].series_start_Y = chart() -> mapToValue(QPointF(pointXY[4].pos_start_X, pointXY[4].pos_start_Y)).y();
+        pointXY[4].series_end_X = chart() -> mapToValue(QPointF(pointXY[4].pos_end_X, pointXY[4].pos_end_Y)).x();
+        pointXY[4].series_end_Y = chart() -> mapToValue(QPointF(pointXY[4].pos_end_X, pointXY[4].pos_end_Y)).y();
         break;
     }
 
@@ -235,6 +255,16 @@ void MScatterPlot::mouseReleaseEvent(QMouseEvent *e)
     {
         m_rect_num ++;
     }
+
+    qDebug() << pointXY[1].pos_start_X;
+    qDebug() << pointXY[1].pos_start_Y;
+    qDebug() << pointXY[1].pos_end_X;
+    qDebug() << pointXY[1].pos_end_Y;
+    qDebug() << pointXY[1].series_start_X;
+    qDebug() << pointXY[1].series_start_Y;
+    qDebug() << pointXY[1].series_end_X;
+    qDebug() << pointXY[1].series_end_Y;
+
 
     update();
 }
@@ -262,6 +292,16 @@ void MScatterPlot::timerEvent(QTimerEvent *)
     }
 }
 
+void MScatterPlot::setPRPD1to5Draw(bool ifDraw)
+{
+    for (int i = 0; i < 5; i ++)
+    {
+        m_PRPD1to5_Draw[i] = ifDraw;
+    }
+
+    m_rect_num = 1;
+    update();
+}
 
 ColorSignWidget::ColorSignWidget(QWidget *parent) : QWidget(parent)
 {
@@ -349,6 +389,13 @@ ClusterChoice::ClusterChoice(QWidget *parent) : QWidget(parent)
     pCaption -> setStyleSheet("color: #FFFFFF;");
     pCaption -> setText("聚类选择");
 
+    m_Combo_Channel = new QComboBox;
+    m_Combo_Channel -> setStyleSheet("background-color:#FFFFFF;");
+    m_Combo_Channel -> insertItem(0, "通道1");
+    m_Combo_Channel -> insertItem(1, "通道2");
+    m_Combo_Channel -> insertItem(2, "通道3");
+    m_Combo_Channel -> insertItem(3, "通道4");
+
     m_Start_Button = new QPushButton;
     m_refresh_Button = new QPushButton;
     m_MSSeparation_Button = new QPushButton;
@@ -368,6 +415,7 @@ ClusterChoice::ClusterChoice(QWidget *parent) : QWidget(parent)
 
     pVBoxLayout = new QVBoxLayout;
     pVBoxLayout -> addWidget(pCaption, 1);
+    pVBoxLayout -> addWidget(m_Combo_Channel, 1);
     pVBoxLayout -> addWidget(m_Start_Button, 1);
     pVBoxLayout -> addWidget(m_refresh_Button, 1);
     pVBoxLayout -> addWidget(m_MSSeparation_Button, 1);
@@ -375,11 +423,14 @@ ClusterChoice::ClusterChoice(QWidget *parent) : QWidget(parent)
     pVBoxLayout -> addWidget(m_Cancel_Button, 1);
 
     setLayout(pVBoxLayout);
+
+    connect(m_refresh_Button, SIGNAL(pressed()), this, SIGNAL(refresh()));
 }
 
 ClusterChoice::~ClusterChoice()
 {
     delete pCaption;
+    delete m_Combo_Channel;
     delete m_Start_Button;
     delete m_refresh_Button;
     delete m_MSSeparation_Button;
@@ -395,6 +446,7 @@ void ClusterChoice::paintEvent(QPaintEvent *e)
     style() -> drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
     QWidget::paintEvent(e);
 }
+
 
 MSSeparationDialog::MSSeparationDialog(QWidget *parent) : QDialog(parent)
 {
@@ -433,6 +485,8 @@ MSSeparationDialog::MSSeparationDialog(QWidget *parent) : QDialog(parent)
     pVBoxLayoutMain -> addLayout(pHBoxLayout_1, 5);
 
     setLayout(pVBoxLayoutMain);
+
+    connect(pClusterChoice, SIGNAL(refresh()), this, SLOT(refreshClick()));
 }
 
 MSSeparationDialog::~MSSeparationDialog()
@@ -445,4 +499,9 @@ MSSeparationDialog::~MSSeparationDialog()
 
     delete pHBoxLayout_1;
     delete pVBoxLayoutMain;
+}
+
+void MSSeparationDialog::refreshClick()
+{
+    pMScatterPlotMain -> setPRPD1to5Draw(false);
 }
