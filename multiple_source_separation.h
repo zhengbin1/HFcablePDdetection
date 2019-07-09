@@ -15,6 +15,74 @@
 
 QT_CHARTS_USE_NAMESPACE
 
+class ScatterPlotPRPD1to5 : public QChartView
+{
+public:
+    ScatterPlotPRPD1to5(QWidget *parent = nullptr);
+    ~ScatterPlotPRPD1to5();
+    // void timerEvent(QTimerEvent *);
+    // void paintEvent(QPaintEvent *);
+    void setTextColor(QString textColor)
+    {
+        m_textColor = textColor;
+        m_axisX -> setTitleText("<span style=\"color:" + textColor + ";\">相位</span>");
+        m_axisY -> setTitleText("<span style=\"color:" + textColor + ";\">幅值V</span>");
+    }
+    void setTitleName(QString titleName)
+    {
+        chart() -> setTitle("<span style=\"color:" + m_textColor + ";\">" + titleName + "</span>");
+    }
+
+private:
+    QValueAxis *m_axisX;
+    QValueAxis *m_axisY;
+
+    QScatterSeries *m_Scatter_Red;
+    QScatterSeries *m_Scatter_Green;
+    QScatterSeries *m_Scatter_Yellow;
+
+    QString m_textColor;
+};
+
+class PRPD1to5Widget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit PRPD1to5Widget(QWidget *parent = nullptr);
+    ~PRPD1to5Widget();
+
+    void paintEvent(QPaintEvent *);
+
+private:
+    QWidget *m_parent;
+
+    ScatterPlotPRPD1to5 *pScatterPlotPRPD1;
+    ScatterPlotPRPD1to5 *pScatterPlotPRPD2;
+    ScatterPlotPRPD1to5 *pScatterPlotPRPD3;
+    ScatterPlotPRPD1to5 *pScatterPlotPRPD4;
+    ScatterPlotPRPD1to5 *pScatterPlotPRPD5;
+
+    QHBoxLayout *pHBoxLayout;
+};
+
+class ScatterPlotPRPD0 : public QChartView
+{
+public:
+    ScatterPlotPRPD0(QWidget *parent = nullptr);
+    ~ScatterPlotPRPD0();
+    // void timerEvent(QTimerEvent *);
+    void paintEvent(QPaintEvent *);
+
+private:
+    QValueAxis *m_axisX;
+    QValueAxis *m_axisY;
+
+    QScatterSeries *m_Scatter_Red;
+    QScatterSeries *m_Scatter_Green;
+    QScatterSeries *m_Scatter_Yellow;
+};
+
 typedef struct
 {
     int pos_start_X = 0;  // 鼠标开始的X位置
@@ -48,12 +116,6 @@ public:
 private:
 
     int m_rect_num = 1;  // 第几个矩形
-
-//    int m_pos_start_X[5] = {0};  // 鼠标开始的X位置
-//    int m_pos_start_Y[5] = {0};  // 鼠标开始的Y位置
-
-//    int m_pos_end_X[5] = {0};  // 鼠标结束的X位置
-//    int m_pos_end_Y[5] = {0};  // 鼠标结束的Y位置
 
     MPointXY pointXY[5];
 
@@ -105,6 +167,8 @@ public:
     void paintEvent(QPaintEvent *);
 
 private:
+    bool startButtonState = false;
+
     QPushButton *pCaption;
     QComboBox *m_Combo_Channel;
     QPushButton *m_Start_Button;
@@ -117,6 +181,7 @@ private:
 
 signals:
     void refresh();
+    void startState(bool);
 };
 
 class MSSeparationDialog : public QDialog
@@ -127,18 +192,23 @@ public:
     MSSeparationDialog(QWidget *parent = nullptr);
     ~MSSeparationDialog();
 
+    void changeEvent(QEvent * event);
+
 private:
     int m_screen_width;
     int m_screen_height;
 
-    QLabel *pCaption;
-
     MScatterPlot *pMScatterPlotMain;
     ColorSignWidget *pColorSignWidget;
     ClusterChoice *pClusterChoice;
+    ScatterPlotPRPD0 *pScatterPlotPRPD0;
+    PRPD1to5Widget *pPRPD1to5Widget;
+
+    QScrollArea *m_ScrollArea;
 
     QVBoxLayout *pVBoxLayoutMain;
     QHBoxLayout *pHBoxLayout_1;
+    QHBoxLayout *pHBoxLayout_2;
 
 private slots:
     void refreshClick();

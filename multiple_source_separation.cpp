@@ -1,5 +1,193 @@
 #include "multiple_source_separation.h"
+#include <QDebug>
 
+
+ScatterPlotPRPD1to5::ScatterPlotPRPD1to5(QWidget *parent): QChartView(new QChart(), parent)
+{
+    setRenderHint(QPainter::Antialiasing);
+
+    m_Scatter_Red = new QScatterSeries();
+    m_Scatter_Red -> setColor(QColor(255, 0, 0));
+    m_Scatter_Red -> setBrush(QBrush(QColor(255, 0, 0)));
+    m_Scatter_Red -> setPen(QPen(QColor(255, 0, 0)));
+    m_Scatter_Red -> setMarkerSize(2);
+    m_Scatter_Red -> setMarkerShape(QScatterSeries::MarkerShapeCircle);
+
+    m_Scatter_Green = new QScatterSeries();
+    m_Scatter_Green -> setColor(QColor(0, 255, 0));
+    m_Scatter_Green -> setBrush(QBrush(QColor(0, 255, 0)));
+    m_Scatter_Green -> setPen(QPen(QColor(0, 255, 0)));
+    m_Scatter_Green -> setMarkerSize(2);
+    m_Scatter_Green -> setMarkerShape(QScatterSeries::MarkerShapeCircle);
+
+    m_Scatter_Yellow = new QScatterSeries();
+    m_Scatter_Yellow -> setColor(QColor(255, 255, 0));
+    m_Scatter_Yellow -> setBrush(QBrush(QColor(255, 255, 0)));
+    m_Scatter_Yellow -> setPen(QPen(QColor(255, 255, 0)));
+    m_Scatter_Yellow -> setMarkerSize(2);
+    m_Scatter_Yellow -> setMarkerShape(QScatterSeries::MarkerShapeCircle);
+
+    m_axisX = new QValueAxis(this);
+    m_axisX -> setLabelsBrush(QBrush(QColor(255, 255, 255)));
+    m_axisX -> setRange(0, 360);
+    m_axisX -> setTickCount(10);
+    m_axisX -> setLabelFormat("%d");
+
+    m_axisY = new QValueAxis(this);
+    m_axisY -> setLabelsBrush(QBrush(QColor(255, 255, 255)));
+    m_axisY -> setRange(-1, 1);
+    m_axisY -> setTickCount(10);
+    m_axisY -> setLabelFormat("%.1f");
+
+    chart() -> legend() -> setVisible(false);
+    chart() -> setBackgroundBrush(QBrush(QColor(0, 0, 0)));
+    chart() -> addSeries(m_Scatter_Red);
+    chart() -> addSeries(m_Scatter_Green);
+    chart() -> addSeries(m_Scatter_Yellow);
+    chart() -> addAxis(m_axisX, Qt::AlignBottom);
+    chart() -> addAxis(m_axisY, Qt::AlignLeft);
+
+    m_Scatter_Red -> attachAxis(m_axisX);
+    m_Scatter_Red -> attachAxis(m_axisY);
+    m_Scatter_Green -> attachAxis(m_axisX);
+    m_Scatter_Green -> attachAxis(m_axisY);
+    m_Scatter_Yellow -> attachAxis(m_axisX);
+    m_Scatter_Yellow -> attachAxis(m_axisY);
+}
+
+ScatterPlotPRPD1to5::~ScatterPlotPRPD1to5()
+{
+    delete m_Scatter_Red;
+    delete m_Scatter_Green;
+    delete m_Scatter_Yellow;
+
+    delete m_axisX;
+    delete m_axisY;
+}
+
+PRPD1to5Widget::PRPD1to5Widget(QWidget *parent) : QWidget(parent), m_parent(parent)
+{
+    pScatterPlotPRPD1 = new ScatterPlotPRPD1to5();
+    pScatterPlotPRPD2 = new ScatterPlotPRPD1to5();
+    pScatterPlotPRPD3 = new ScatterPlotPRPD1to5();
+    pScatterPlotPRPD4 = new ScatterPlotPRPD1to5();
+    pScatterPlotPRPD5 = new ScatterPlotPRPD1to5();
+
+    pScatterPlotPRPD1 -> setTextColor("#ff0000");
+    pScatterPlotPRPD2 -> setTextColor("#ff9900");
+    pScatterPlotPRPD3 -> setTextColor("#ffff00");
+    pScatterPlotPRPD4 -> setTextColor("#8A2BE2");
+    pScatterPlotPRPD5 -> setTextColor("#0000ff");
+
+    pScatterPlotPRPD1 -> setTitleName("PRPD-1");
+    pScatterPlotPRPD2 -> setTitleName("PRPD-2");
+    pScatterPlotPRPD3 -> setTitleName("PRPD-3");
+    pScatterPlotPRPD4 -> setTitleName("PRPD-4");
+    pScatterPlotPRPD5 -> setTitleName("PRPD-5");
+
+    pHBoxLayout = new QHBoxLayout(this);
+    pHBoxLayout -> addWidget(pScatterPlotPRPD1);
+    pHBoxLayout -> addWidget(pScatterPlotPRPD2);
+    pHBoxLayout -> addWidget(pScatterPlotPRPD3);
+    pHBoxLayout -> addWidget(pScatterPlotPRPD4);
+    pHBoxLayout -> addWidget(pScatterPlotPRPD5);
+
+    setLayout(pHBoxLayout);
+}
+
+PRPD1to5Widget::~PRPD1to5Widget()
+{
+    delete pScatterPlotPRPD1;
+    delete pScatterPlotPRPD2;
+    delete pScatterPlotPRPD3;
+    delete pScatterPlotPRPD4;
+    delete pScatterPlotPRPD5;
+
+    delete pHBoxLayout;
+}
+
+void PRPD1to5Widget::paintEvent(QPaintEvent *e)
+{
+    QStyleOption opt;
+    opt.initFrom(this);
+    QPainter p(this);
+    style() -> drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    QWidget::paintEvent(e);
+
+    this -> resize(2000, m_parent -> height() - 17);
+}
+
+ScatterPlotPRPD0::ScatterPlotPRPD0(QWidget *parent): QChartView(new QChart(), parent)
+{
+    setRenderHint(QPainter::Antialiasing);
+
+    m_Scatter_Red = new QScatterSeries();
+    m_Scatter_Red -> setColor(QColor(255, 0, 0));
+    m_Scatter_Red -> setBrush(QBrush(QColor(255, 0, 0)));
+    m_Scatter_Red -> setPen(QPen(QColor(255, 0, 0)));
+    m_Scatter_Red -> setMarkerSize(2);
+    m_Scatter_Red -> setMarkerShape(QScatterSeries::MarkerShapeCircle);
+
+    m_Scatter_Green = new QScatterSeries();
+    m_Scatter_Green -> setColor(QColor(0, 255, 0));
+    m_Scatter_Green -> setBrush(QBrush(QColor(0, 255, 0)));
+    m_Scatter_Green -> setPen(QPen(QColor(0, 255, 0)));
+    m_Scatter_Green -> setMarkerSize(2);
+    m_Scatter_Green -> setMarkerShape(QScatterSeries::MarkerShapeCircle);
+
+    m_Scatter_Yellow = new QScatterSeries();
+    m_Scatter_Yellow -> setColor(QColor(255, 255, 0));
+    m_Scatter_Yellow -> setBrush(QBrush(QColor(255, 255, 0)));
+    m_Scatter_Yellow -> setPen(QPen(QColor(255, 255, 0)));
+    m_Scatter_Yellow -> setMarkerSize(2);
+    m_Scatter_Yellow -> setMarkerShape(QScatterSeries::MarkerShapeCircle);
+
+    m_axisX = new QValueAxis(this);
+    m_axisX -> setTitleText("<span style=\"color:#00e500;\">相位</span>");
+    m_axisX -> setLabelsBrush(QBrush(QColor(255, 255, 255)));
+    m_axisX -> setRange(0, 360);
+    m_axisX -> setTickCount(10);
+    m_axisX -> setLabelFormat("%d");
+
+    m_axisY = new QValueAxis(this);
+    m_axisY -> setTitleText("<span style=\"color:#00e500;\">幅值V</span>");
+    m_axisY -> setLabelsBrush(QBrush(QColor(255, 255, 255)));
+    m_axisY -> setRange(-1, 1);
+    m_axisY -> setTickCount(10);
+    m_axisY -> setLabelFormat("%.1f");
+
+
+    chart() -> legend() -> setVisible(false);
+    chart() -> setTitle("<span style=\"color:#00e500;\">PRPD-0</span>");
+    chart() -> setBackgroundBrush(QBrush(QColor(0, 0, 0)));
+    chart() -> addSeries(m_Scatter_Red);
+    chart() -> addSeries(m_Scatter_Green);
+    chart() -> addSeries(m_Scatter_Yellow);
+    chart() -> addAxis(m_axisX, Qt::AlignBottom);
+    chart() -> addAxis(m_axisY, Qt::AlignLeft);
+
+    m_Scatter_Red -> attachAxis(m_axisX);
+    m_Scatter_Red -> attachAxis(m_axisY);
+    m_Scatter_Green -> attachAxis(m_axisX);
+    m_Scatter_Green -> attachAxis(m_axisY);
+    m_Scatter_Yellow -> attachAxis(m_axisX);
+    m_Scatter_Yellow -> attachAxis(m_axisY);
+}
+
+ScatterPlotPRPD0::~ScatterPlotPRPD0()
+{
+    delete m_Scatter_Red;
+    delete m_Scatter_Green;
+    delete m_Scatter_Yellow;
+
+    delete m_axisX;
+    delete m_axisY;
+}
+
+void ScatterPlotPRPD0::paintEvent(QPaintEvent *e)
+{
+    QChartView::paintEvent(e);
+}
 
 MScatterPlot::MScatterPlot(QWidget *parent): QChartView(new QChart(), parent)
 {
@@ -41,6 +229,7 @@ MScatterPlot::MScatterPlot(QWidget *parent): QChartView(new QChart(), parent)
     m_axisY -> setLabelFormat("%d");
 
     chart() -> legend() -> setVisible(false);
+    chart() -> setTitle("<p style=\"color:#00BFFF;font-size:25px;text-align:center;\">多 源 分 离</p>");
     chart() -> setBackgroundBrush(QBrush(QColor(0, 0, 0)));
     chart() -> addSeries(m_Scatter_Red);
     chart() -> addSeries(m_Scatter_Green);
@@ -256,16 +445,6 @@ void MScatterPlot::mouseReleaseEvent(QMouseEvent *e)
         m_rect_num ++;
     }
 
-    qDebug() << pointXY[1].pos_start_X;
-    qDebug() << pointXY[1].pos_start_Y;
-    qDebug() << pointXY[1].pos_end_X;
-    qDebug() << pointXY[1].pos_end_Y;
-    qDebug() << pointXY[1].series_start_X;
-    qDebug() << pointXY[1].series_start_Y;
-    qDebug() << pointXY[1].series_end_X;
-    qDebug() << pointXY[1].series_end_Y;
-
-
     update();
 }
 
@@ -316,22 +495,22 @@ ColorSignWidget::ColorSignWidget(QWidget *parent) : QWidget(parent)
 
     m_Color_Label0 -> setStyleSheet("background-color: #00e500;");
     m_Color_Label0 -> resize(25, 15);
-    m_Color_Label0 -> move(10, 10);
+    m_Color_Label0 -> move(10, 20);
     m_Color_Label1 -> setStyleSheet("background-color: #ff0000;");
     m_Color_Label1 -> resize(25, 15);
-    m_Color_Label1 -> move(10, 35);
+    m_Color_Label1 -> move(10, 50);
     m_Color_Label2 -> setStyleSheet("background-color: #ff9900;");
     m_Color_Label2 -> resize(25, 15);
-    m_Color_Label2 -> move(10, 60);
+    m_Color_Label2 -> move(10, 80);
     m_Color_Label3 -> setStyleSheet("background-color: #ffff00;");
     m_Color_Label3 -> resize(25, 15);
-    m_Color_Label3 -> move(10, 85);
+    m_Color_Label3 -> move(10, 110);
     m_Color_Label4 -> setStyleSheet("background-color: #8A2BE2;");
     m_Color_Label4 -> resize(25, 15);
-    m_Color_Label4 -> move(10, 110);
+    m_Color_Label4 -> move(10, 135);
     m_Color_Label5 -> setStyleSheet("background-color: #0000ff;");
     m_Color_Label5 -> resize(25, 15);
-    m_Color_Label5 -> move(10, 135);
+    m_Color_Label5 -> move(10, 160);
 
     m_Text_PRPD0 = new QLabel(this);
     m_Text_PRPD1 = new QLabel(this);
@@ -347,12 +526,12 @@ ColorSignWidget::ColorSignWidget(QWidget *parent) : QWidget(parent)
     m_Text_PRPD4 -> setText("<span style=\"color:#ffffff;font-size:15px;text-align:center;\">PRPD-4</span>");
     m_Text_PRPD5 -> setText("<span style=\"color:#ffffff;font-size:15px;text-align:center;\">PRPD-5</span>");
 
-    m_Text_PRPD0 -> move(40, 10);
-    m_Text_PRPD1 -> move(40, 35);
-    m_Text_PRPD2 -> move(40, 60);
-    m_Text_PRPD3 -> move(40, 85);
-    m_Text_PRPD4 -> move(40, 110);
-    m_Text_PRPD5 -> move(40, 135);
+    m_Text_PRPD0 -> move(40, 20);
+    m_Text_PRPD1 -> move(40, 50);
+    m_Text_PRPD2 -> move(40, 80);
+    m_Text_PRPD3 -> move(40, 110);
+    m_Text_PRPD4 -> move(40, 135);
+    m_Text_PRPD5 -> move(40, 160);
 }
 
 ColorSignWidget::~ColorSignWidget()
@@ -425,6 +604,17 @@ ClusterChoice::ClusterChoice(QWidget *parent) : QWidget(parent)
     setLayout(pVBoxLayout);
 
     connect(m_refresh_Button, SIGNAL(pressed()), this, SIGNAL(refresh()));
+    connect(m_Start_Button, &QPushButton::clicked, this, [=]{
+        qDebug() << startButtonState;
+        if(startButtonState == false)
+        {
+            startButtonState = true;
+            m_Start_Button -> setText("开 始");
+        } else {
+            startButtonState = false;
+            m_Start_Button -> setText("停 止");
+        }
+    });
 }
 
 ClusterChoice::~ClusterChoice()
@@ -468,21 +658,29 @@ MSSeparationDialog::MSSeparationDialog(QWidget *parent) : QDialog(parent)
 
     resize(m_screen_width / 2, m_screen_height / 2);
 
-    pCaption = new QLabel();
-    pCaption -> setText("<p style=\"color:#00BFFF;font-size:25px;text-align:center;\">多 源 分 离</p>");
-
     pMScatterPlotMain = new MScatterPlot();
     pColorSignWidget = new ColorSignWidget();
     pClusterChoice = new ClusterChoice();
+    pScatterPlotPRPD0 = new ScatterPlotPRPD0();
+
+    m_ScrollArea = new QScrollArea();
+    pPRPD1to5Widget = new PRPD1to5Widget(m_ScrollArea);
+    m_ScrollArea -> setFrameShape(QFrame::NoFrame);
+    m_ScrollArea -> setWidget(pPRPD1to5Widget);
 
     pHBoxLayout_1 = new QHBoxLayout();
     pHBoxLayout_1 -> addWidget(pColorSignWidget, 1);
     pHBoxLayout_1 -> addWidget(pMScatterPlotMain, 7);
     pHBoxLayout_1 -> addWidget(pClusterChoice, 1);
 
+    pHBoxLayout_2 = new QHBoxLayout();
+    pHBoxLayout_2 -> addWidget(pScatterPlotPRPD0, 2);
+    pHBoxLayout_2 -> addWidget(m_ScrollArea, 5);
+    pPRPD1to5Widget -> resize(2000, m_ScrollArea -> height());
+
     pVBoxLayoutMain = new QVBoxLayout();
-    pVBoxLayoutMain -> addWidget(pCaption, 1);
-    pVBoxLayoutMain -> addLayout(pHBoxLayout_1, 5);
+    pVBoxLayoutMain -> addLayout(pHBoxLayout_1);
+    pVBoxLayoutMain -> addLayout(pHBoxLayout_2);
 
     setLayout(pVBoxLayoutMain);
 
@@ -491,17 +689,42 @@ MSSeparationDialog::MSSeparationDialog(QWidget *parent) : QDialog(parent)
 
 MSSeparationDialog::~MSSeparationDialog()
 {
-    delete pCaption;
-
     delete pMScatterPlotMain;
     delete pColorSignWidget;
     delete pClusterChoice;
+    delete pScatterPlotPRPD0;
+    delete pPRPD1to5Widget;
+    delete m_ScrollArea;
 
     delete pHBoxLayout_1;
+    delete pHBoxLayout_2;
     delete pVBoxLayoutMain;
 }
 
 void MSSeparationDialog::refreshClick()
 {
     pMScatterPlotMain -> setPRPD1to5Draw(false);
+}
+
+
+void MSSeparationDialog::changeEvent(QEvent *event)
+{
+    if(event -> type() != QEvent::WindowStateChange)
+    {
+        return;
+    }
+
+    if(this -> windowState() == Qt::WindowMaximized)
+    {
+        pHBoxLayout_1 -> setStretch(0, 1);
+        pHBoxLayout_1 -> setStretch(1, 12);
+        pHBoxLayout_1 -> setStretch(2, 1);
+    }
+
+    if(this -> windowState() == Qt::WindowNoState)
+    {
+        pHBoxLayout_1 -> setStretch(0, 1);
+        pHBoxLayout_1 -> setStretch(1, 7);
+        pHBoxLayout_1 -> setStretch(2, 1);
+    }
 }
