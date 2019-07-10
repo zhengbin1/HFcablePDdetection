@@ -112,10 +112,16 @@ public:
     void mouseReleaseEvent(QMouseEvent *);
 
     void setPRPD1to5Draw(bool);  // 设置是否绘制矩形圈选框
+    void setStartOrEnd(bool state)  // 设置是开始运行还是结束
+    {
+        m_start_or_end = state;
+    }
 
 private:
 
     int m_rect_num = 1;  // 第几个矩形
+
+    bool m_start_or_end = false;
 
     MPointXY pointXY[5];
 

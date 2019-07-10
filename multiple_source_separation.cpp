@@ -318,6 +318,11 @@ void MScatterPlot::paintEvent(QPaintEvent *e)
 
 void MScatterPlot::mousePressEvent(QMouseEvent *e)
 {
+    if(m_start_or_end == true)
+    {
+        return;
+    }
+
     if(m_rect_num <= 5)
     {
         switch (m_rect_num)
@@ -394,6 +399,11 @@ void MScatterPlot::mouseMoveEvent(QMouseEvent *e)
 
 void MScatterPlot::mouseReleaseEvent(QMouseEvent *e)
 {
+    if(m_start_or_end == true)
+    {
+        return;
+    }
+
     switch (m_rect_num)
     {
     case 1:
@@ -451,6 +461,15 @@ void MScatterPlot::mouseReleaseEvent(QMouseEvent *e)
 
 void MScatterPlot::timerEvent(QTimerEvent *)
 {
+    if(m_start_or_end == false)
+    {
+        return;
+    }
+    if(m_start_or_end == true)
+    {
+        setPRPD1to5Draw(false);
+    }
+
     m_Scatter_Red -> clear();
     m_Scatter_Green -> clear();
     m_Scatter_Yellow -> clear();
@@ -605,14 +624,16 @@ ClusterChoice::ClusterChoice(QWidget *parent) : QWidget(parent)
 
     connect(m_refresh_Button, SIGNAL(pressed()), this, SIGNAL(refresh()));
     connect(m_Start_Button, &QPushButton::clicked, this, [=]{
-        qDebug() << startButtonState;
+
         if(startButtonState == false)
         {
             startButtonState = true;
-            m_Start_Button -> setText("开 始");
+            m_Start_Button -> setText("停 止");
+            emit startState(true);
         } else {
             startButtonState = false;
-            m_Start_Button -> setText("停 止");
+            m_Start_Button -> setText("开 始");
+            emit startState(false);
         }
     });
 }
@@ -685,6 +706,9 @@ MSSeparationDialog::MSSeparationDialog(QWidget *parent) : QDialog(parent)
     setLayout(pVBoxLayoutMain);
 
     connect(pClusterChoice, SIGNAL(refresh()), this, SLOT(refreshClick()));
+    connect(pClusterChoice, &ClusterChoice::startState, this, [=](bool state){
+        pMScatterPlotMain -> setStartOrEnd(state);
+    });
 }
 
 MSSeparationDialog::~MSSeparationDialog()
