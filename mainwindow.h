@@ -17,6 +17,7 @@
 #include "project_manage_dialog.h"
 #include "new_project_dialog.h"
 #include "multiple_source_separation.h"
+#include "query_dialog.h"
 
 
 namespace Ui {
@@ -54,6 +55,7 @@ private:
     NewProjectDialog *pNewProjectDialog;
     ProjectManageDialog *pProjectManageDialog;
     MSSeparationDialog *pMSSeparationDialog;
+    CQueryDialog *pQueryDialog;
 
 private slots:
     void timerUpdate();

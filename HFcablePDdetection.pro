@@ -34,6 +34,7 @@ SOURCES += \
         operation_file.cpp \
         operation_sqlite.cpp \
         project_manage_dialog.cpp \
+        query_dialog.cpp \
         scatter_plot.cpp \
         trend_channel_widget.cpp \
         type_diagnosis_double_slider.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
         operation_file.h \
         operation_sqlite.h \
         project_manage_dialog.h \
+        query_dialog.h \
         scatter_plot.h \
         trend_channel_widget.h \
         type_diagnosis_double_slider.h \
