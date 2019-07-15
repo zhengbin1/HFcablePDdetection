@@ -8,6 +8,7 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QtCharts>
+#include <QTabWidget>
 
 class CBarLine : public QWidget
 {
@@ -60,12 +61,24 @@ public:
     ~CQueryDialog();
 
 private:
+    QLabel *pTextTitle;
+
     QHBoxLayout *pHBoxLayoutMain;
+    QVBoxLayout *pVBoxLayout1;
 
     int m_screen_width;
     int m_screen_height;
 
     CBarGraph5 *pBarGraph;
+
+    QTabWidget *pTabWidget;
+    QLabel *pLabelText1;
+    QLineEdit *pLineEdit1;
+    QWidget *pTabW1;
+    QWidget *pTabW2;
+    QVBoxLayout *pTabW1_Layout;
+    QFormLayout *pTabW1_Layout1;
+    QVBoxLayout *pTabW2_Layout;
 };
 
 #endif // QUERY_DIALOG_H

@@ -33,12 +33,6 @@ void CBarLine::mousePressEvent(QMouseEvent *event)
 
 void CBarLine::mouseMoveEvent(QMouseEvent *event)
 {
-    qDebug() << "mouseStartPoint " << mouseStartPoint;
-    qDebug() << this -> frameGeometry().topLeft();
-    qDebug() << event -> globalPos() - mouseStartPoint;
-
-    qDebug() << windowTopLeftPoint + (event -> globalPos() - mouseStartPoint);
-
     if(m_bar_moved == true)
     {
         // 获得鼠标移动的距离
@@ -58,12 +52,13 @@ void CBarLine::mouseReleaseEvent(QMouseEvent *event)
         m_bar_moved = false;
     }
 
-    if(m_PlotArea.x() > this -> frameGeometry().topLeft().x())
+    if(m_PlotArea.x() > this -> frameGeometry().topLeft().x())  // 如果超出左边位置，则停留在最左的开始位置
     {
         this -> move(static_cast<int>(m_PlotArea.x()), static_cast<int>(m_PlotArea.y()));
     }
 
-    if(static_cast<int>(m_PlotArea.width() + m_PlotArea.x()) < this -> frameGeometry().bottomRight().x()){
+    if(static_cast<int>(m_PlotArea.width() + m_PlotArea.x()) < this -> frameGeometry().bottomRight().x())  // 如果超出右边位置，则停留在最右的开始位置
+    {
         this -> move(static_cast<int>(m_PlotArea.width() + m_PlotArea.x()), static_cast<int>(m_PlotArea.y()));
     }
 }
@@ -141,10 +136,38 @@ CQueryDialog::CQueryDialog(QWidget *parent) : QDialog(parent)
 
     resize(m_screen_width / 2, m_screen_height / 2);
 
+    pTextTitle = new QLabel(this);
+    pTextTitle -> setText("<p style=\"color:#00FF00;font-size:15px;text-align:center;\">查询方式</p>");
+
+    pTabWidget = new QTabWidget();
+    pTabW1 = new QWidget(pTabWidget);
+    pTabW2 = new QWidget(pTabWidget);
+    pTabWidget -> addTab(pTabW1, "按项目名称查询");
+    pTabWidget -> addTab(pTabW2, "按时间查询");
+
+    pTabW1_Layout = new QVBoxLayout(pTabW1);
+    pTabW2_Layout = new QVBoxLayout(pTabW2);
+
+    pLabelText1 = new QLabel;
+    pLabelText1 -> setText("<p style=\"color:#00FF00;font-size:15px;text-align:center;\">项目名称</p>");
+    pLineEdit1 = new QLineEdit;
+
+    pTabW1_Layout1 = new QFormLayout;
+    pTabW1_Layout1 -> addRow(pLabelText1, pLineEdit1);
+
+    pTabW1_Layout -> addLayout(pTabW1_Layout1, 1);
+    pTabW1 -> setLayout(pTabW1_Layout);
+    pTabW2 -> setLayout(pTabW2_Layout);
+
+    pVBoxLayout1 = new QVBoxLayout();
+    pVBoxLayout1 -> addWidget(pTextTitle);
+    pVBoxLayout1 -> addWidget(pTabWidget);
+
     pBarGraph = new CBarGraph5();
 
     pHBoxLayoutMain = new QHBoxLayout(this);
-    pHBoxLayoutMain -> addWidget(pBarGraph);
+    pHBoxLayoutMain -> addLayout(pVBoxLayout1, 1);
+    pHBoxLayoutMain -> addWidget(pBarGraph, 3);
 
     setLayout(pHBoxLayoutMain);
 }
@@ -152,5 +175,15 @@ CQueryDialog::CQueryDialog(QWidget *parent) : QDialog(parent)
 CQueryDialog::~CQueryDialog()
 {
     delete pBarGraph;
+    delete pTextTitle;
+    delete pLabelText1;
+    delete pLineEdit1;
+    delete pTabW1_Layout1;
+    delete pTabW1_Layout;
+    delete pTabW2_Layout;
+    delete pTabW1;
+    delete pTabW2;
+    delete pTabWidget;
+    delete pVBoxLayout1;
     delete pHBoxLayoutMain;
 }
