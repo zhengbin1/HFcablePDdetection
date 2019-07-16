@@ -15,8 +15,7 @@ class CBarLine : public QWidget
 public:
     CBarLine(QWidget *parent = nullptr);
     ~CBarLine();
-    void paintEvent(QPaintEvent *);
-    // void timerEvent(QTimerEvent *);
+    // void paintEvent(QPaintEvent *);
 
     void setPlotArea(QRectF plotArea)
     {
@@ -32,6 +31,8 @@ private:
     bool m_bar_moved = false;
     QPoint mouseStartPoint;
     QPoint windowTopLeftPoint;
+    int m_posX = 0;
+    int m_posY = 0;
 };
 
 
@@ -74,11 +75,20 @@ private:
     QTabWidget *pTabWidget;
     QLabel *pLabelText1;
     QLineEdit *pLineEdit1;
+    QPushButton *pSearchButton1;
+    QLabel *pLabelText2;
+    QLineEdit *pLineEdit2;
+    QLabel *pLabelText3;
+    QLineEdit *pLineEdit3;
+    QPushButton *pSearchButton2;
     QWidget *pTabW1;
     QWidget *pTabW2;
     QVBoxLayout *pTabW1_Layout;
     QFormLayout *pTabW1_Layout1;
     QVBoxLayout *pTabW2_Layout;
+    QHBoxLayout *pTabW2_HLayout1;
+    QHBoxLayout *pTabW2_HLayout2;
+    QHBoxLayout *pTabW2_HLayout3;
 };
 
 #endif // QUERY_DIALOG_H

@@ -104,9 +104,9 @@ TypeDiagnosisWidget::TypeDiagnosisWidget(QWidget *parent) : QWidget(parent)
     pLineEdit2 = new QLineEdit(this);
     pLineEdit3 = new QLineEdit(this);
 
-    pLineEdit1 -> setStyleSheet("background-color: #fff;");
-    pLineEdit2 -> setStyleSheet("background-color: #fff;");
-    pLineEdit3 -> setStyleSheet("background-color: #fff;");
+    pLineEdit1 -> setStyleSheet("background-color: #ffffff;");
+    pLineEdit2 -> setStyleSheet("background-color: #ffffff;");
+    pLineEdit3 -> setStyleSheet("background-color: #ffffff;");
 
     progressBar1 = new QProgressBar(this);
     progressBar2 = new QProgressBar(this);
