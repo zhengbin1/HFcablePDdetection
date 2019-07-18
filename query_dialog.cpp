@@ -167,24 +167,43 @@ CQueryDialog::CQueryDialog(QWidget *parent) : QDialog(parent)
 
     pLabelText2 = new QLabel;
     pLabelText2 -> setText("<p style=\"color:#00FF00;font-size:15px;text-align:center;\">起始时间</p>");
-    pLineEdit2 = new QLineEdit;
-    pLineEdit2 -> setStyleSheet("background-color: #ffffff;");
+    pDateEdit1 = new QDateEdit;
+    pDateEdit1 -> setStyleSheet("background-color: #ffffff;");
+    pDateEdit1 -> setCalendarPopup(true);
     pLabelText3 = new QLabel;
     pLabelText3 -> setText("<p style=\"color:#00FF00;font-size:15px;text-align:center;\">终止时间</p>");
-    pLineEdit3 = new QLineEdit;
-    pLineEdit3 -> setStyleSheet("background-color: #ffffff;");
+    pDateEdit2 = new QDateEdit;
+    pDateEdit2 -> setStyleSheet("background-color: #ffffff;");
+    pDateEdit2 -> setCalendarPopup(true);
     pSearchButton2 = new QPushButton;
     pSearchButton2 -> setStyleSheet("background-color: #1bd1a5;");
     pSearchButton2 -> setIcon(QIcon(QPixmap(":/resource/images/search_32px_1182191_easyicon.net.ico")));
     pSearchButton2 -> setText("查 询");
 
+    pCalendar1 = new QCalendarWidget(this);
+    pCalendar1 -> setStyleSheet("background-color: #99CC99;");
+    pCalendar1 -> show();
+    pDateEdit1 -> setCalendarWidget(pCalendar1);
+    pDateEdit1 -> setDate(pCalendar1 -> selectedDate());
+    QDate date(QDateTime::currentDateTime().date());
+    date.setDate(date.year(), date.month(), date.day());
+    pCalendar1 -> setSelectedDate(date);
+
+    pCalendar2 = new QCalendarWidget(this);
+    pCalendar2 -> setStyleSheet("background-color: #99CC99;");
+    pCalendar2 -> show();
+    pDateEdit2 -> setCalendarWidget(pCalendar2);
+    pDateEdit2 -> setDate(pCalendar2 -> selectedDate());
+    pCalendar2 -> setSelectedDate(date);
+
+
     pTabW2_HLayout1 = new QHBoxLayout;
-    pTabW2_HLayout1 -> addWidget(pLabelText2);
-    pTabW2_HLayout1 -> addWidget(pLineEdit2);
+    pTabW2_HLayout1 -> addWidget(pLabelText2, 1);
+    pTabW2_HLayout1 -> addWidget(pDateEdit1, 2);
 
     pTabW2_HLayout2 = new QHBoxLayout;
-    pTabW2_HLayout2 -> addWidget(pLabelText3);
-    pTabW2_HLayout2 -> addWidget(pLineEdit3);
+    pTabW2_HLayout2 -> addWidget(pLabelText3, 1);
+    pTabW2_HLayout2 -> addWidget(pDateEdit2, 2);
 
     pTabW2_HLayout3 = new QHBoxLayout;
     pTabW2_HLayout3 -> addWidget(pSearchButton2);
@@ -197,8 +216,10 @@ CQueryDialog::CQueryDialog(QWidget *parent) : QDialog(parent)
     pTabW2 -> setLayout(pTabW2_Layout);
 
     pVBoxLayout1 = new QVBoxLayout();
-    pVBoxLayout1 -> addWidget(pTextTitle);
-    pVBoxLayout1 -> addWidget(pTabWidget);
+    pVBoxLayout1 -> addWidget(pTextTitle, 1);
+    pVBoxLayout1 -> addWidget(pTabWidget, 5);
+    pVBoxLayout1 -> addStretch(10);
+
 
     pBarGraph = new CBarGraph5();
 
@@ -217,10 +238,12 @@ CQueryDialog::~CQueryDialog()
     delete pLineEdit1;
     delete pSearchButton1;
     delete pLabelText2;
-    delete pLineEdit2;
+    delete pDateEdit1;
     delete pLabelText3;
-    delete pLineEdit3;
+    delete pDateEdit2;
     delete pSearchButton2;
+    delete pCalendar1;
+    delete pCalendar2;
     delete pTabW1_Layout1;
     delete pTabW2_HLayout1;
     delete pTabW2_HLayout2;

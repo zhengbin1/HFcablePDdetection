@@ -77,9 +77,11 @@ private:
     QLineEdit *pLineEdit1;
     QPushButton *pSearchButton1;
     QLabel *pLabelText2;
-    QLineEdit *pLineEdit2;
+    QDateEdit *pDateEdit1;
+    QCalendarWidget *pCalendar1;
     QLabel *pLabelText3;
-    QLineEdit *pLineEdit3;
+    QDateEdit *pDateEdit2;
+    QCalendarWidget *pCalendar2;
     QPushButton *pSearchButton2;
     QWidget *pTabW1;
     QWidget *pTabW2;
