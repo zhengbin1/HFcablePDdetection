@@ -1,5 +1,66 @@
 #include "query_dialog.h"
 
+CBarGraph1::CBarGraph1(QWidget *parent): QChartView(new QChart(), parent)
+{
+    QDateTime startTime(QDate(2000, 1, 1), QTime(0, 0, 0));
+    QDateTime endTime(QDate(2000, 1, 1), QTime(0, 20, 0));
+
+    m_AxisX = new QValueAxis;
+    m_AxisX -> setTitleText("<span style=\"color:#FFFFFF;\">相位(°)</span>");
+    m_AxisX -> setLabelsBrush(QBrush(QColor(255, 255, 255)));
+    m_AxisX -> setTickCount(10);
+    m_AxisX -> setRange(0, 360);
+
+    m_AxisY = new QValueAxis;
+    m_AxisY -> setTitleText("<span style=\"color:#FFFFFF;\">幅值V</span>");
+    m_AxisY -> setLabelsBrush(QBrush(QColor(255, 255, 255)));
+    m_AxisY -> setTickCount(7);
+    m_AxisY -> setRange(-1, 1);
+    m_AxisY -> setLabelFormat("%.1f");
+
+    chart() -> legend() -> setVisible(false);
+    chart() -> setBackgroundBrush(QBrush(QColor(0, 0, 0)));
+    chart() -> addAxis(m_AxisX, Qt::AlignBottom);
+    chart() -> addAxis(m_AxisY, Qt::AlignLeft);
+}
+
+CBarGraph1::~CBarGraph1()
+{
+    delete m_AxisX;
+    delete m_AxisY;
+}
+
+
+CBarGraph2::CBarGraph2(QWidget *parent): QChartView(new QChart(), parent)
+{
+    QDateTime startTime(QDate(2000, 1, 1), QTime(0, 0, 0));
+    QDateTime endTime(QDate(2000, 1, 1), QTime(0, 20, 0));
+
+    m_AxisX = new QValueAxis;
+    m_AxisX -> setTitleText("<span style=\"color:#FFFFFF;\">相位(°)</span>");
+    m_AxisX -> setLabelsBrush(QBrush(QColor(255, 255, 255)));
+    m_AxisX -> setTickCount(10);
+    m_AxisX -> setRange(0, 360);
+
+    m_AxisY = new QValueAxis;
+    m_AxisY -> setTitleText("<span style=\"color:#FFFFFF;\">个数</span>");
+    m_AxisY -> setLabelsBrush(QBrush(QColor(255, 255, 255)));
+    m_AxisY -> setTickCount(7);
+    m_AxisY -> setRange(0, 1000);
+
+    chart() -> legend() -> setVisible(false);
+    chart() -> setBackgroundBrush(QBrush(QColor(0, 0, 0)));
+    chart() -> addAxis(m_AxisX, Qt::AlignBottom);
+    chart() -> addAxis(m_AxisY, Qt::AlignLeft);
+}
+
+CBarGraph2::~CBarGraph2()
+{
+    delete m_AxisX;
+    delete m_AxisY;
+}
+
+
 CBarLine::CBarLine(QWidget *parent) : QWidget(parent)
 {
     setStyleSheet("background-color:#00ff00;");
@@ -148,7 +209,7 @@ CQueryDialog::CQueryDialog(QWidget *parent) : QDialog(parent)
     pTabW2_Layout = new QVBoxLayout(pTabW2);
 
     pLabelText1 = new QLabel;
-    pLabelText1 -> setText("<p style=\"color:#00FF00;font-size:15px;text-align:center;\">项目名称</p>");
+    pLabelText1 -> setText("<p style=\"color:#00FF00;font-size:12px;text-align:center;\">项目名称</p>");
 
     pLineEdit1 = new QLineEdit;
     pLineEdit1 -> setStyleSheet("background-color: #ffffff;");
@@ -166,12 +227,12 @@ CQueryDialog::CQueryDialog(QWidget *parent) : QDialog(parent)
     pTabW1_Layout -> addWidget(pSearchButton1, 1);
 
     pLabelText2 = new QLabel;
-    pLabelText2 -> setText("<p style=\"color:#00FF00;font-size:15px;text-align:center;\">起始时间</p>");
+    pLabelText2 -> setText("<p style=\"color:#00FF00;font-size:12px;text-align:center;\">起始时间</p>");
     pDateEdit1 = new QDateEdit;
     pDateEdit1 -> setStyleSheet("background-color: #ffffff;");
     pDateEdit1 -> setCalendarPopup(true);
     pLabelText3 = new QLabel;
-    pLabelText3 -> setText("<p style=\"color:#00FF00;font-size:15px;text-align:center;\">终止时间</p>");
+    pLabelText3 -> setText("<p style=\"color:#00FF00;font-size:12px;text-align:center;\">终止时间</p>");
     pDateEdit2 = new QDateEdit;
     pDateEdit2 -> setStyleSheet("background-color: #ffffff;");
     pDateEdit2 -> setCalendarPopup(true);
@@ -220,20 +281,37 @@ CQueryDialog::CQueryDialog(QWidget *parent) : QDialog(parent)
     pVBoxLayout1 -> addWidget(pTabWidget, 5);
     pVBoxLayout1 -> addStretch(10);
 
+    pBarGraph1 = new CBarGraph1;
+    pBarGraph2 = new CBarGraph1;
+    pBarGraph3 = new CBarGraph2;
+    pBarGraph4 = new CBarGraph2;
+    pBarGraph5 = new CBarGraph5;
 
-    pBarGraph = new CBarGraph5();
+    pGridLayout = new QGridLayout;
+    pGridLayout -> addWidget(pBarGraph1, 0, 0, 1, 1);
+    pGridLayout -> addWidget(pBarGraph2, 0, 1, 1, 1);
+    pGridLayout -> addWidget(pBarGraph3, 1, 0, 1, 1);
+    pGridLayout -> addWidget(pBarGraph4, 1, 1, 1, 1);
+    pGridLayout -> addWidget(pBarGraph5, 2, 0, 1, 2);
+
 
     pHBoxLayoutMain = new QHBoxLayout(this);
     pHBoxLayoutMain -> addLayout(pVBoxLayout1, 1);
-    pHBoxLayoutMain -> addWidget(pBarGraph, 3);
+    pHBoxLayoutMain -> addLayout(pGridLayout, 5);
 
     setLayout(pHBoxLayoutMain);
 }
 
 CQueryDialog::~CQueryDialog()
 {
-    delete pBarGraph;
+    delete pBarGraph1;
+    delete pBarGraph2;
+    delete pBarGraph3;
+    delete pBarGraph4;
+    delete pBarGraph5;
     delete pTextTitle;
+    delete pCalendar1;
+    delete pCalendar2;
     delete pLabelText1;
     delete pLineEdit1;
     delete pSearchButton1;
@@ -242,8 +320,7 @@ CQueryDialog::~CQueryDialog()
     delete pLabelText3;
     delete pDateEdit2;
     delete pSearchButton2;
-    delete pCalendar1;
-    delete pCalendar2;
+
     delete pTabW1_Layout1;
     delete pTabW2_HLayout1;
     delete pTabW2_HLayout2;
@@ -252,6 +329,7 @@ CQueryDialog::~CQueryDialog()
     delete pTabW2_Layout;
     delete pTabW1;
     delete pTabW2;
+    delete pGridLayout;
     delete pTabWidget;
     delete pVBoxLayout1;
     delete pHBoxLayoutMain;

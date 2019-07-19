@@ -10,12 +10,34 @@
 #include <QtCharts>
 #include <QTabWidget>
 
+
+class CBarGraph1 : public QChartView
+{
+public:
+    CBarGraph1(QWidget *parent = nullptr);
+    ~CBarGraph1();
+
+private:
+    QValueAxis *m_AxisX;
+    QValueAxis *m_AxisY;
+};
+
+class CBarGraph2 : public QChartView
+{
+public:
+    CBarGraph2(QWidget *parent = nullptr);
+    ~CBarGraph2();
+
+private:
+    QValueAxis *m_AxisX;
+    QValueAxis *m_AxisY;
+};
+
 class CBarLine : public QWidget
 {
 public:
     CBarLine(QWidget *parent = nullptr);
     ~CBarLine();
-    // void paintEvent(QPaintEvent *);
 
     void setPlotArea(QRectF plotArea)
     {
@@ -70,7 +92,12 @@ private:
     int m_screen_width;
     int m_screen_height;
 
-    CBarGraph5 *pBarGraph;
+    CBarGraph1 *pBarGraph1;
+    CBarGraph1 *pBarGraph2;
+    CBarGraph2 *pBarGraph3;
+    CBarGraph2 *pBarGraph4;
+
+    CBarGraph5 *pBarGraph5;
 
     QTabWidget *pTabWidget;
     QLabel *pLabelText1;
@@ -91,6 +118,7 @@ private:
     QHBoxLayout *pTabW2_HLayout1;
     QHBoxLayout *pTabW2_HLayout2;
     QHBoxLayout *pTabW2_HLayout3;
+    QGridLayout *pGridLayout;
 };
 
 #endif // QUERY_DIALOG_H
