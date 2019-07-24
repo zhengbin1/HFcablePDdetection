@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        fault_location.cpp \
         library/qcustomplot/qcustomplot.cpp \
         logindialog.cpp \
         main.cpp \
@@ -41,6 +42,7 @@ SOURCES += \
         type_diagnosis_widget.cpp
 
 HEADERS += \
+        fault_location.h \
         library/qcustomplot/qcustomplot.h \
         logindialog.h \
         mainwindow.h \

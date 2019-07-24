@@ -2,7 +2,6 @@
 
 QCPLine1::QCPLine1(QWidget *parent) : QWidget(parent)
 {
-
     m_Plot = new QCustomPlot(this);
     m_Plot -> setBackground(QBrush(Qt::black));
     m_Plot -> setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes);
@@ -43,6 +42,7 @@ QCPLine1::QCPLine1(QWidget *parent) : QWidget(parent)
 
     startTimer(1000);
 }
+
 
 QCPLine1::~QCPLine1()
 {

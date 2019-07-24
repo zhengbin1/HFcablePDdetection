@@ -91,8 +91,16 @@ MainWindow::MainWindow(QWidget *parent) :
     pMSSeparationDialog -> hide();
     pQueryDialog = new CQueryDialog(this);
     pQueryDialog -> hide();
+    pFaultLocation = new CFaultLocation(this);
+    pFaultLocation -> hide();
 
     connect(ui -> menu_1, SIGNAL(triggered(QAction *)), this, SLOT(triggerMenu1(QAction *)));
+    connect(ui -> menu_3, &QMenu::triggered, this, [=](QAction *a){
+        if(a -> objectName() == "action_9")
+        {
+            pFaultLocation -> exec();
+        }
+    });
     connect(ui -> menu_4, SIGNAL(triggered(QAction *)), this, SLOT(triggerMenu4(QAction *)));
     connect(ui -> menu_5, &QMenu::triggered, this, [=](QAction *a){
         if(a -> objectName() == "action_8")
@@ -129,6 +137,7 @@ MainWindow::~MainWindow()
     delete pProjectManageDialog;
     delete pMSSeparationDialog;
     delete pQueryDialog;
+    delete pFaultLocation;
 }
 
 void MainWindow::timerUpdate()

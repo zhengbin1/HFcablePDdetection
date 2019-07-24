@@ -2,9 +2,6 @@
 
 CBarGraph1::CBarGraph1(QWidget *parent): QChartView(new QChart(), parent)
 {
-    QDateTime startTime(QDate(2000, 1, 1), QTime(0, 0, 0));
-    QDateTime endTime(QDate(2000, 1, 1), QTime(0, 20, 0));
-
     m_AxisX = new QValueAxis;
     m_AxisX -> setTitleText("<span style=\"color:#FFFFFF;\">相位(°)</span>");
     m_AxisX -> setLabelsBrush(QBrush(QColor(255, 255, 255)));
@@ -33,9 +30,6 @@ CBarGraph1::~CBarGraph1()
 
 CBarGraph2::CBarGraph2(QWidget *parent): QChartView(new QChart(), parent)
 {
-    QDateTime startTime(QDate(2000, 1, 1), QTime(0, 0, 0));
-    QDateTime endTime(QDate(2000, 1, 1), QTime(0, 20, 0));
-
     m_AxisX = new QValueAxis;
     m_AxisX -> setTitleText("<span style=\"color:#FFFFFF;\">相位(°)</span>");
     m_AxisX -> setLabelsBrush(QBrush(QColor(255, 255, 255)));

@@ -18,6 +18,7 @@
 #include "new_project_dialog.h"
 #include "multiple_source_separation.h"
 #include "query_dialog.h"
+#include "fault_location.h"
 
 
 namespace Ui {
@@ -56,6 +57,7 @@ private:
     ProjectManageDialog *pProjectManageDialog;
     MSSeparationDialog *pMSSeparationDialog;
     CQueryDialog *pQueryDialog;
+    CFaultLocation *pFaultLocation;
 
 private slots:
     void timerUpdate();
