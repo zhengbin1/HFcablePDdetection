@@ -21,7 +21,7 @@ LoginDialog::LoginDialog(QWidget *parent) :
     QImage background;
     background.load(":/resource/images/login_background.png");
 
-    resize(background.width(), background.height());
+    setFixedSize(background.width(), background.height());
 
     loginButton = new QPushButton(this);
     exitButton = new QPushButton(this);
